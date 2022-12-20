@@ -1,8 +1,13 @@
 import React from 'react'
+import UsersListItem from './UsersListItem'
 
-function UsersListContainer() {
+function UsersListContainer({users}) {
   return (
-    <div>UsersListContainer</div>
+    <div>
+      {users.map(result => {
+      <UsersListItem data={result} />
+      })}
+    </div>
   )
 }
 

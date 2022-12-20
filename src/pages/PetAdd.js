@@ -1,8 +1,11 @@
 import React from 'react'
+import PetAddForm from '../components/PetAddForm'
 
 function PetAdd() {
   return (
-    <div>PetAdd</div>
+    <div>
+      <PetAddForm />
+    </div>
   )
 }
 

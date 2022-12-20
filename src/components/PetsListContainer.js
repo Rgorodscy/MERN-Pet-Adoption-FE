@@ -1,8 +1,13 @@
 import React from 'react'
+import PetsListItem from './PetsListItem'
 
-function PetsListContainer() {
+function PetsListContainer({pets}) {
   return (
-    <div>PetsListContainer</div>
+    <div>
+      {pets.map(result => {
+      <PetsListItem data={result} />
+      })}
+    </div>
   )
 }
 
