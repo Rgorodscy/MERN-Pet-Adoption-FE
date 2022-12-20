@@ -1,8 +1,11 @@
 import React from 'react'
+import PetCard from '../components/PetCard'
 
 function MyPets() {
   return (
-    <div>MyPets</div>
+    <div>
+      <PetCard />
+    </div>
   )
 }
 

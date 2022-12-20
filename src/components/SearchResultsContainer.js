@@ -1,8 +1,13 @@
 import React from 'react'
+import PetCard from './PetCard'
 
-function SearchResultsContainer() {
+function SearchResultsContainer({searchResults}) {
   return (
-    <div>SearchResultsContainer</div>
+    <div>
+      {searchResults.map(result => {
+        <PetCard data={result} />
+      })}
+    </div>
   )
 }
 
