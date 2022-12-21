@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import UsersListContainer from '../components/UsersListContainer';
 import PetsListContainer from '../components/PetsListContainer'
+import BasicComponentsContext from '../contexts/BasicComponentsContext';
+import { useAuth } from '../contexts/AuthContext';
 
 function Dashboard() {
   const [users, setusers] = useState([]);
-  const [pets, setPets] = useState([]);
 
-  //Create UseEffect that fetches the data from the server
-  
   return (
     <div>
       <UsersListContainer users={users} />
-      <PetsListContainer pets={pets} />
+      <PetsListContainer />
     </div>
   )
 }

@@ -4,13 +4,13 @@ import Image from 'react-bootstrap/Image'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 
-function PetCard() {
+function PetCard({pet}) {
   return (
     <Card>
       <Card.Body>
-        <Image height='60px' width='60px' />
-        <h1>Pet Name</h1>
-        <Alert></Alert>
+        <Image src={pet.image} height='60px' width='60px' />
+        <h1>{pet.name}</h1>
+        <Alert>{pet.adoptionStatus}</Alert>
         <Button>See More</Button>
       </Card.Body>
     </Card>
