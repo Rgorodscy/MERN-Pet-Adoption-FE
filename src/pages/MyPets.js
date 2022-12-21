@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PetCard from '../components/PetCard'
 
 function MyPets() {
+  const [mypets, setMypets] = useState([])
+  
   return (
     <div>
-      <PetCard />
+      <h1>My Pets</h1>
+      {mypets.map(pet => {
+      <PetCard pet={pet} />
+      })}
     </div>
   )
 }
