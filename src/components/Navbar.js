@@ -7,11 +7,19 @@ import { useAuth } from '../contexts/AuthContext';
 
 function Navbar() {
   const navigate = useNavigate();
-  const {setShowLoginModal} = useAuth();
+  const {setShowLoginModal, currentUser, setCurrentUser} = useAuth();
 
-  const handleLoginOpen = () => {
-    navigate('/');
-    setShowLoginModal(true)
+  const handleLoginLogout = (e) => {
+    if(!currentUser) {
+      e.preventDefault();
+      navigate('/');
+      setShowLoginModal(true)
+    }
+    if(currentUser){
+      setCurrentUser();
+      navigate('/');
+      setShowLoginModal(false)
+    }
   }
 
   return (
@@ -19,10 +27,15 @@ function Navbar() {
       <div>
       <Button className='me-1' variant='light' onClick={() => navigate('/')}>Home</Button>
       <Button variant='light' onClick={() => navigate('/search')}>Search</Button>
+      <Button variant='light' onClick={() => navigate('/dashboard')}>Dashboard</Button>
+      <Button variant='light' onClick={() => navigate('/mypets')}>My Pets</Button>
+      <Button variant='light' onClick={() => navigate('/petadd')}>Pet Add</Button>
+      <Button variant='light' onClick={() => navigate('/profile')}>Profile</Button>
+
       </div>
       <h2>Pet Center</h2>
       <div>
-      <Button onClick={handleLoginOpen} variant='light'>Login</Button>
+      <Button onClick={handleLoginLogout} variant='light' type='submit'>{currentUser ? "Logout" : "Login" }</Button>
       </div>
     </Nav>
   )

@@ -3,9 +3,11 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useNavigate }  from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 
-function SignUp() {
+function Signup({setSignup}) {
+  const {serverUrl} = useAuth()
   const navigate = useNavigate();
   const [newUser, setNewUser] = useState({
     email: "",
@@ -22,15 +24,15 @@ function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(newUser)
     postUser(newUser);
   }
 
   const postUser = async (newUser) => {
     try{
-      const res = await axios.post("http://localhost:8080/signup/", newUser);
+      const res = await axios.post(`${serverUrl}/signup/`, newUser);
       if(res){
-        navigate('/login')
+        navigate('/');
+        setSignup(false)
       }
     }catch(err){
       console.log(err);
@@ -73,4 +75,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default Signup

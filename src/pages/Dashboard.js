@@ -1,16 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React from 'react'
 import UsersListContainer from '../components/UsersListContainer';
 import PetsListContainer from '../components/PetsListContainer'
-import BasicComponentsContext from '../contexts/BasicComponentsContext';
-import { useAuth } from '../contexts/AuthContext';
 
 function Dashboard() {
-  const [users, setusers] = useState([]);
 
   return (
-    <div>
-      <UsersListContainer users={users} />
+    <div className='d-flex mx-3'>
       <PetsListContainer />
+      <UsersListContainer />
     </div>
   )
 }

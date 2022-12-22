@@ -9,6 +9,7 @@ import axios from 'axios';
 
 
 function Pet() {
+  const {serverUrl} = useAuth();
   const { id } = useParams();
   const [petData, setPetData] = useState([])
 
@@ -19,7 +20,7 @@ function Pet() {
   const initialFetch = async () => {
     const petId = id.slice(1);
     try{
-      const petFound = await axios.get(`http://localhost:8080/pet/${petId}`);
+      const petFound = await axios.get(`${serverUrl}/pet/${petId}`);
       setPetData(petFound.data);
     }catch(err){
       console.log(err)
@@ -56,6 +57,7 @@ function Pet() {
               <Alert variant={adoptionStatusAlertColor}>{petData.adoptionStatus}</Alert>
             </div>
             <Button disabled={petData.adoptionStatus !== "Available"}>Change Status</Button>
+            <Button>Save for Later</Button>
           </Card.Body>
         </Card>
     

@@ -3,8 +3,10 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios';
 import { useNavigate }  from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext';
 
 function PetAddForm() {
+  const {serverUrl} = useAuth();
   const navigate = useNavigate();
   const formGroupClass = 'd-flex align-items-baseline justify-content-between mb-2'
   const formLabelClass = 'me-3 text-nowrap'
@@ -41,7 +43,7 @@ function PetAddForm() {
 
   const postPet = async (addPet) => {
     try{
-      const res = await axios.post("http://localhost:8080/pet", addPet);
+      const res = await axios.post(`${serverUrl}/pet`, addPet);
       navigate('/dashboard')
     }catch(err){
       console.log(err);
@@ -91,7 +93,7 @@ function PetAddForm() {
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Bio</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="bio"></Form.Control>
+        <Form.Control className={formInputClass} as='textarea' onChange={handleChange} name="bio"></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Hypoallergenic</Form.Label>

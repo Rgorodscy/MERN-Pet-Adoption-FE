@@ -10,6 +10,7 @@ import PetAdd from '../pages/PetAdd';
 import Search from '../pages/Search';
 import Dashboard from '../pages/Dashboard';
 import { AuthProvider } from '../contexts/AuthContext';
+import PrivateRoute from '../components/PrivateRoute';
 
 
 function MainComponent() {
@@ -21,13 +22,28 @@ function MainComponent() {
           <Navbar />
           <Routes>
             <Route exact path='/' element={<Homepage />} />
-            <Route path='/mypets' element={<MyPets />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route exact path='/pet' element={<Pet />} />
-            <Route path='/pet/:id' element={<Pet />} />
-            <Route path='/petadd' element={<PetAdd />} />
             <Route path='/search' element={<Search />} />
-            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/pet/:id' element={<Pet />} />
+            <Route path='/profile' element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+            } />
+            <Route path='/mypets' element={
+            <PrivateRoute>
+              <MyPets />
+            </PrivateRoute>
+            } />
+            <Route path='/petadd' element={
+              <PrivateRoute>
+              <PetAdd />
+            </PrivateRoute>
+            } />
+            <Route path='/dashboard' element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+            } />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

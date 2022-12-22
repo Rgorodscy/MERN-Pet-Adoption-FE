@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser} = useAuth();
+  const {currentUser, setCurrentUser, serverUrl, setShowLoginModal} = useAuth();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -24,8 +24,9 @@ function Login() {
 
   const postUser = async (user) => {
     try{
-      const res = await axios.post("http://localhost:8080/login/", user);
-      setCurrentUser(res.data) 
+      const res = await axios.post(`${serverUrl}/login/`, user);
+      setCurrentUser(res.data);
+      setShowLoginModal(false);
       //Set currentUser in AuthContext with res.data
       navigate('/mypets')
     }catch(err){
