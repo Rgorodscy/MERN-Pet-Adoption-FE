@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Login from './Login'
-import SignUp from './SignUp'
+import SignUp from './Signup'
 import Form from 'react-bootstrap/Form'
 
 
