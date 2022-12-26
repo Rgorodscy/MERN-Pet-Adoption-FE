@@ -21,7 +21,7 @@ function Pet() {
     const petId = id.slice(1);
     try{
       const petFound = await axios.get(`${serverUrl}/pet/${petId}`);
-      setPetData(petFound.data);
+      setPetData(petFound.data[0]);
     }catch(err){
       console.log(err)
     }

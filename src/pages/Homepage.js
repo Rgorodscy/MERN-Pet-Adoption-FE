@@ -5,11 +5,15 @@ import CloseButton from 'react-bootstrap/esm/CloseButton';
 import { useAuth } from '../contexts/AuthContext';
 
 function Homepage() {
-  const {showLoginModal, setShowLoginModal} = useAuth();
+  const {showLoginModal, setShowLoginModal, currentUser} = useAuth();
 
   return (
     <div className='d-flex flex-column align-items-center mt-3'>
-      <h1>Welcome to the pet center of adoption</h1>
+      <h1>Welcome to the pet center of adoption<br/>
+        {currentUser && 
+          ` ${currentUser.firstName} ${currentUser.lastName}`
+          }
+      </h1>
       <p className='text-justify w-50 mt-3'>We bring you a great platform to find your next puppy.
       We have some options on how to proceed.
       The first thing is to create an account, after that, you will

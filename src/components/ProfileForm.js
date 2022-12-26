@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useAuth } from '../contexts/AuthContext'
+import axios from 'axios';
+import { useNavigate }  from 'react-router-dom'
 
 function ProfileForm() {
-  const {currentUser} = useAuth();
+  const navigate = useNavigate();
+  const {currentUser, setCurrentUser, serverUrl} = useAuth();
   const [newUserInfo, setNewuserInfo] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
@@ -20,21 +23,12 @@ function ProfileForm() {
     setNewuserInfo({...newUserInfo, [e.target.name]: e.target.value})
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const updateUserObject = {
-      newUserInfo: {
-        ...newUserInfo,
-        id: currentUser.id 
-      },
-      currentUser
-    }
-
-    console.log(updateUserObject)
-    
-    //Send put request to the server, with the currentUser object and newUserInfo object to update.
-    //the request body needs the current user info and the new user info
-    //The server will return the updated user object, setCurrentUser to this
+   
+    const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo);
+    setCurrentUser(updatedUser.data);
+    navigate("/mypets")
   }
 
   return (
@@ -67,7 +61,7 @@ function ProfileForm() {
         </Form.Group>
         <Form.Group>
           <Form.Label>Bio</Form.Label>
-          <Form.Control as='textarea' value={currentUser.bio} name="bio" onChange={handleChange}></Form.Control>
+          <Form.Control as='textarea' value={currentUser.bio ? currentUser.bio : ""} name="bio" onChange={handleChange}></Form.Control>
         </Form.Group>
         <Button type="submit" className='mt-2'>Update Profile</Button>
       </Form>
