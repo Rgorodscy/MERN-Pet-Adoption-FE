@@ -8,7 +8,7 @@ import { useNavigate }  from 'react-router-dom'
 function ProfileForm() {
   const navigate = useNavigate();
   const {currentUser, setCurrentUser, serverUrl} = useAuth();
-  const [newUserInfo, setNewuserInfo] = useState({
+  const [newUserInfo, setNewUserInfo] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
     email: currentUser.email,
@@ -20,7 +20,7 @@ function ProfileForm() {
   });
 
   const handleChange= (e) => {
-    setNewuserInfo({...newUserInfo, [e.target.name]: e.target.value})
+    setNewUserInfo({...newUserInfo, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = async (e) => {

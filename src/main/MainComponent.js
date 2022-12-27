@@ -6,7 +6,7 @@ import Homepage from '../pages/Homepage';
 import MyPets from '../pages/MyPets';
 import Profile from '../pages/Profile';
 import Pet from '../pages/Pet';
-import PetAdd from '../pages/PetAdd';
+import PetAddEdit from '../pages/PetAddEdit';
 import Search from '../pages/Search';
 import Dashboard from '../pages/Dashboard';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -36,7 +36,12 @@ function MainComponent() {
             } />
             <Route path='/petadd' element={
               <PrivateRoute>
-              <PetAdd />
+              <PetAddEdit />
+            </PrivateRoute>
+            } />
+            <Route path='/petedit/:id' element={
+              <PrivateRoute>
+              <PetAddEdit />
             </PrivateRoute>
             } />
             <Route path='/dashboard' element={

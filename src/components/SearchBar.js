@@ -14,6 +14,7 @@ function SearchBar({setSearchResults}) {
     setSearchObject({...searchObject,  [e.target.name]: e.target.value})
   }
 
+  console.log(searchObject)
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -69,7 +70,7 @@ function SearchBar({setSearchResults}) {
             <Form.Control type='text' onChange={handleChange} name='name'></Form.Control>
           </Form.Group>    
         </>}
-        {searched && <Button onClick={handleClear} className="mt-2" >Clear Search</Button>}
+        {searched && <Button type='reset' onClick={handleClear} className="mt-2" >Clear Search</Button>}
         {!searched && <Button type='submit' className="mt-2">Search</Button>}
       </Form>
     </div>

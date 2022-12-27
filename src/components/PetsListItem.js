@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 function PetsListItem({pet}) {
-  const petPageLink = `/pet/:${pet.id}`
+  const petPageLink = `/petedit/:${pet.id}`
 
   
   return (
