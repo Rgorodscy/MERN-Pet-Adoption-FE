@@ -3,22 +3,25 @@ import Card from 'react-bootstrap/Card'
 import Image from 'react-bootstrap/Image'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 
 
 function Pet() {
-  const {serverUrl} = useAuth();
+  const {serverUrl, currentUser, setCurrentUser} = useAuth();
   const { id } = useParams();
   const [petData, setPetData] = useState([])
+  const petId = id.slice(1);
+  const userSavedPets = currentUser.savedPets;
+  const userMyPets = currentUser.myPets;
 
   useEffect(() => {
     initialFetch();
   }, []);
 
   const initialFetch = async () => {
-    const petId = id.slice(1);
     try{
       const petFound = await axios.get(`${serverUrl}/pet/${petId}`);
       setPetData(petFound.data[0]);
@@ -30,22 +33,76 @@ function Pet() {
   let adoptionStatusAlertColor;
 
   if(petData.adoptionStatus === "Available") {
-    adoptionStatusAlertColor = 'primary'
-  } else if (petData.adoptionStatus === "Fostered"){
-    adoptionStatusAlertColor = 'secondary'
-  } else {
     adoptionStatusAlertColor = 'success'
+  } else if (petData.adoptionStatus === "Fostered"){
+    adoptionStatusAlertColor = 'primary'
+  } else {
+    adoptionStatusAlertColor = 'secondary'
+  }
+
+  const petIsSaved = userSavedPets.find((pet) => pet.id === petId);
+  const petIsMyPet = userMyPets.find((pet) => pet.id === petId);
+
+  const handleSave = async () => {
+    const reqBody = {
+      userId: currentUser.id
+    }
+    if(!petIsSaved){
+      try{
+        const saveRes = await axios.post(`${serverUrl}/pet/${petId}/save`, reqBody);
+        setCurrentUser({...currentUser, savedPets: [...currentUser.savedPets,  saveRes.data]})
+      }catch(err){
+        console.log(err);
+      };
+    }
+    if(petIsSaved){
+      try{
+        const saveRes = await axios.delete(`${serverUrl}/pet/${petId}/save`, {data: reqBody});
+        const newSavedPetsArray = currentUser.savedPets.filter((pet) => pet.id !== petId);
+        setCurrentUser({...currentUser, savedPets: newSavedPetsArray});
+      }catch(err){
+        console.log(err);
+      };
+    }
+  }
+
+  const handleAdoptFoster = async (changeType) => {
+    const reqBody = {
+      userId: currentUser.id,
+      type: changeType
+    }
+    try{
+      const adoptFosterRes = await axios.post(`${serverUrl}/pet/${petId}/adopt`, reqBody);
+      setCurrentUser({...currentUser, myPets: [...currentUser.myPets,  adoptFosterRes.data]});
+      setPetData(adoptFosterRes.data);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const handleReturn = async () => {
+    const reqBody = {
+      userId: currentUser.id
+    }
+    try{
+      const returnRes = await axios.post(`${serverUrl}/pet/${petId}/return`, reqBody);
+      const newMyPetsArray = currentUser.myPets.filter((pet) => pet.id !== petId);
+      setCurrentUser({...currentUser, myPets: newMyPetsArray});
+      setPetData(returnRes.data);
+    }catch(err){
+      console.log(err);
+    }
   }
 
   return (
       petData &&
       
-        <Card>
+        <Card className='text-secondary'>
           <Card.Body className='d-flex flex-column align-items-center'>
             <Image height='240px' width='240px' className='rounded' />
             <h1>{petData.name}</h1>
             <div className='w-50'>
-              <p className='border border-secondary rounded'>Details:
+              <p className='border border-secondary rounded'>Details:  <br/>
                 Height: {petData.height} <br/>
                 Weight: {petData.weight} <br/>
                 Color: {petData.color} <br/>
@@ -56,8 +113,15 @@ function Pet() {
               </p>
               <Alert variant={adoptionStatusAlertColor}>{petData.adoptionStatus}</Alert>
             </div>
-            <Button disabled={petData.adoptionStatus !== "Available"}>Change Status</Button>
-            <Button>Save for Later</Button>
+            <div className='d-flex w-50 justify-content-around mb-3'>
+            {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Adopt")} variant='success'>Adopt</Button> || petIsMyPet && petData.adoptionStatus === "Fostered" && <Button onClick={() => handleAdoptFoster("Adopt")}>Adopt</Button>}
+            {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Foster")} >Foster</Button>}
+            {petIsMyPet && <Button onClick={handleReturn} variant='secondary'>Return</Button>}
+              <Link onClick={handleSave} className='h4'>
+                {petIsSaved && <BsBookmarkHeartFill />}
+                {!petIsSaved  && <BsBookmarkHeart />}
+              </Link>
+            </div>
           </Card.Body>
         </Card>
     

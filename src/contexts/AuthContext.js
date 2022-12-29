@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
     const [petsList, setPetsList] = useState([]);
     const [usersList, setUsersList] = useState([]);
     const [currentUser, setCurrentUser] = useState();
-    const serverUrl = "http://localhost:8080"
+    const serverUrl = process.env.SERVER_URL || "http://localhost:8080"
 
     useEffect(() => {
       setLoading(false);

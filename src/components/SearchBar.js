@@ -14,8 +14,6 @@ function SearchBar({setSearchResults}) {
     setSearchObject({...searchObject,  [e.target.name]: e.target.value})
   }
 
-  console.log(searchObject)
-
   const handleSearch = async (e) => {
     e.preventDefault();
     setSearched(true);
@@ -25,7 +23,6 @@ function SearchBar({setSearchResults}) {
     }catch(err){
       console.log(err)
     }
-    //Send request to the server with the values from the search
   }
 
   const handleClear = () => {
