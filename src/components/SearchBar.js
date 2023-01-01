@@ -37,7 +37,7 @@ function SearchBar({setSearchResults}) {
         <Form.Check type='switch' id='basic-advanced-search' label='Advanced Search' onChange={() => setAdvancedSearch(!advancedSearch)} />
         <Form.Group>
           <Form.Label>Type</Form.Label>
-          <Form.Select defaultValue={0} onChange={handleChange} name='type'>
+          <Form.Select defaultValue={0} onChange={handleChange} disabled={searched} name='type'>
             <option value={0} disabled>Select...</option>
             <option value={"Dog"} >Dog</option>
             <option value={"Cat"} >Cat</option>
@@ -47,7 +47,7 @@ function SearchBar({setSearchResults}) {
         <> 
           <Form.Group>
             <Form.Label>Adoption Status</Form.Label>
-            <Form.Select defaultValue={0} onChange={handleChange} name='adoptionStatus'>
+            <Form.Select defaultValue={0} onChange={handleChange} disabled={searched} name='adoptionStatus'>
               <option value={0} disabled={true}>Select...</option>  
               <option value={"Available"}>Available</option>
               <option value={"Fostered"}>Fostered</option>
@@ -56,15 +56,15 @@ function SearchBar({setSearchResults}) {
           </Form.Group>
             <Form.Group>
             <Form.Label>Height</Form.Label>
-          <Form.Control type='text' onChange={handleChange} name='height'></Form.Control>
+          <Form.Control type='text' onChange={handleChange} name='height' disabled={searched}></Form.Control>
           </Form.Group>      
           <Form.Group>
             <Form.Label>Weight</Form.Label>
-            <Form.Control type='text' onChange={handleChange} name='weight'></Form.Control>
+            <Form.Control type='text' onChange={handleChange} name='weight' disabled={searched}></Form.Control>
           </Form.Group>  
           <Form.Group>
             <Form.Label>Name</Form.Label>
-            <Form.Control type='text' onChange={handleChange} name='name'></Form.Control>
+            <Form.Control type='text' onChange={handleChange} name='name' disabled={searched}></Form.Control>
           </Form.Group>    
         </>}
         {searched && <Button type='reset' onClick={handleClear} className="mt-2" >Clear Search</Button>}

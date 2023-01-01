@@ -8,7 +8,7 @@ function PetAddEdit() {
   const { id } = useParams();
 
   return (
-    <div>
+    <div className='mt-3 text-secondary'>
       {!id && <PetAddForm />}
       {id && <PetEditForm />}
     </div>

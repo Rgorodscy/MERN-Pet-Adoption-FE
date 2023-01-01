@@ -5,9 +5,12 @@ import PetsListContainer from '../components/PetsListContainer'
 function Dashboard() {
 
   return (
-    <div className='d-flex mx-3'>
-      <PetsListContainer />
-      <UsersListContainer />
+    <div className='d-flex flex-column m-3 text-secondary'>
+      <h1>Dashboard</h1>
+      <div className='d-flex'>
+        <PetsListContainer />
+        <UsersListContainer />
+      </div>
     </div>
   )
 }

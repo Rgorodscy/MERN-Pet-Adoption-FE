@@ -6,7 +6,9 @@ function SearchResultsContainer({searchResults}) {
     <div className='container mt-4'>
       <div className='row justify-content-center'>
         {searchResults.map(pet => 
-          <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
+          <div className='w-25 m-2'>
+            <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
+          </div>
         )}
       </div>
     </div>

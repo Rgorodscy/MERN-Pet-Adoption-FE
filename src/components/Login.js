@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser, serverUrl, setShowLoginModal} = useAuth();
+  const {currentUser, setCurrentUser, serverUrl, setShowLoginModal, setToken} = useAuth();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -25,9 +25,11 @@ function Login() {
   const postUser = async (user) => {
     try{
       const res = await axios.post(`${serverUrl}/login/`, user);
-      setCurrentUser(res.data);
+      setCurrentUser(res.data.userData);
+      setToken(res.data.token);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', res.data.userData);
       setShowLoginModal(false);
-      //Set currentUser in AuthContext with res.data
       navigate('/mypets')
     }catch(err){
       console.log(err);

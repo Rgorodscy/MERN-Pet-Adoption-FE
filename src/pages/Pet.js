@@ -10,12 +10,14 @@ import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 
 
 function Pet() {
-  const {serverUrl, currentUser, setCurrentUser} = useAuth();
+  const {serverUrl, currentUser, setCurrentUser, token} = useAuth();
   const { id } = useParams();
   const [petData, setPetData] = useState([])
   const petId = id.slice(1);
   const userSavedPets = currentUser.savedPets;
   const userMyPets = currentUser.myPets;
+  const petIsSaved = userSavedPets.find((pet) => pet.id === petId);
+  const petIsMyPet = userMyPets.find((pet) => pet.id === petId);
 
   useEffect(() => {
     initialFetch();
@@ -40,8 +42,6 @@ function Pet() {
     adoptionStatusAlertColor = 'secondary'
   }
 
-  const petIsSaved = userSavedPets.find((pet) => pet.id === petId);
-  const petIsMyPet = userMyPets.find((pet) => pet.id === petId);
 
   const handleSave = async () => {
     const reqBody = {
@@ -49,7 +49,7 @@ function Pet() {
     }
     if(!petIsSaved){
       try{
-        const saveRes = await axios.post(`${serverUrl}/pet/${petId}/save`, reqBody);
+        const saveRes = await axios.post(`${serverUrl}/pet/${petId}/save`, reqBody, {headers: {authorization: `Bearer ${token}`}});
         setCurrentUser({...currentUser, savedPets: [...currentUser.savedPets,  saveRes.data]})
       }catch(err){
         console.log(err);
@@ -57,7 +57,7 @@ function Pet() {
     }
     if(petIsSaved){
       try{
-        const saveRes = await axios.delete(`${serverUrl}/pet/${petId}/save`, {data: reqBody});
+        const saveRes = await axios.delete(`${serverUrl}/pet/${petId}/save`, {data: reqBody, headers: {authorization: `Bearer ${token}`}});
         const newSavedPetsArray = currentUser.savedPets.filter((pet) => pet.id !== petId);
         setCurrentUser({...currentUser, savedPets: newSavedPetsArray});
       }catch(err){
@@ -72,7 +72,7 @@ function Pet() {
       type: changeType
     }
     try{
-      const adoptFosterRes = await axios.post(`${serverUrl}/pet/${petId}/adopt`, reqBody);
+      const adoptFosterRes = await axios.post(`${serverUrl}/pet/${petId}/adopt`, reqBody, {headers: {authorization: `Bearer ${token}`}});
       setCurrentUser({...currentUser, myPets: [...currentUser.myPets,  adoptFosterRes.data]});
       setPetData(adoptFosterRes.data);
     }catch(err){
@@ -85,7 +85,7 @@ function Pet() {
       userId: currentUser.id
     }
     try{
-      const returnRes = await axios.post(`${serverUrl}/pet/${petId}/return`, reqBody);
+      const returnRes = await axios.post(`${serverUrl}/pet/${petId}/return`, reqBody, {headers: {authorization: `Bearer ${token}`}});
       const newMyPetsArray = currentUser.myPets.filter((pet) => pet.id !== petId);
       setCurrentUser({...currentUser, myPets: newMyPetsArray});
       setPetData(returnRes.data);
@@ -124,7 +124,6 @@ function Pet() {
             </div>
           </Card.Body>
         </Card>
-    
   )
 }
 

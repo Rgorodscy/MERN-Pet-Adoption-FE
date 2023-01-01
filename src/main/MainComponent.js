@@ -11,7 +11,7 @@ import Search from '../pages/Search';
 import Dashboard from '../pages/Dashboard';
 import { AuthProvider } from '../contexts/AuthContext';
 import PrivateRoute from '../components/PrivateRoute';
-
+import AdminRoute from '../components/AdminRoute'
 
 function MainComponent() {
 
@@ -23,7 +23,11 @@ function MainComponent() {
           <Routes>
             <Route exact path='/' element={<Homepage />} />
             <Route path='/search' element={<Search />} />
-            <Route path='/pet/:id' element={<Pet />} />
+            <Route path='/pet/:id' element={
+            <PrivateRoute>
+              <Pet />
+            </PrivateRoute>
+            } />
             <Route path='/profile' element={
             <PrivateRoute>
               <Profile />
@@ -34,19 +38,26 @@ function MainComponent() {
               <MyPets />
             </PrivateRoute>
             } />
+            
             <Route path='/petadd' element={
-              <PrivateRoute>
-              <PetAddEdit />
+            <PrivateRoute>
+              <AdminRoute>
+                <PetAddEdit />
+              </AdminRoute>
             </PrivateRoute>
             } />
             <Route path='/petedit/:id' element={
-              <PrivateRoute>
-              <PetAddEdit />
+            <PrivateRoute>
+              <AdminRoute>
+                <PetAddEdit />
+              </AdminRoute>
             </PrivateRoute>
             } />
             <Route path='/dashboard' element={
             <PrivateRoute>
-              <Dashboard />
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
             </PrivateRoute>
             } />
           </Routes>

@@ -10,20 +10,22 @@ function PetCard({pet}) {
   
   let adoptionStatusAlertColor;
   if(pet.adoptionStatus === "Available") {
-    adoptionStatusAlertColor = 'primary'
-  } else if (pet.adoptionStatus === "Fostered"){
-    adoptionStatusAlertColor = 'secondary'
-  } else {
     adoptionStatusAlertColor = 'success'
+  } else if (pet.adoptionStatus === "Fostered"){
+    adoptionStatusAlertColor = 'primary'
+  } else {
+    adoptionStatusAlertColor = 'secondary'
   }
   
   
   return (
-    <Card className='w-25 m-2'>
+    <Card>
+      <Card.Header>
+        <h3 className='text-center text-capitalize'>{pet.name}</h3>
+      </Card.Header>
       <Card.Body>
         <Image src={pet.image} height='60px' width='60px' />
-        <h3 className='text-center text-capitalize'>{pet.name}</h3>
-        <Alert variant={adoptionStatusAlertColor}>{pet.adoptionStatus}</Alert>
+        <Alert className='mt-3' variant={adoptionStatusAlertColor}>{pet.adoptionStatus}</Alert>
         <Link to={petPageLink} className="btn btn-primary">See More</Link>
       </Card.Body>
     </Card>

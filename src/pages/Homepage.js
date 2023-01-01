@@ -8,7 +8,7 @@ function Homepage() {
   const {showLoginModal, setShowLoginModal, currentUser} = useAuth();
 
   return (
-    <div className='d-flex flex-column align-items-center mt-3'>
+    <div className='d-flex flex-column align-items-center mt-3 text-secondary'>
       <h1>Welcome to the pet center of adoption<br/>
         {currentUser && 
           ` ${currentUser.firstName} ${currentUser.lastName}`

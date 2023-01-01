@@ -1,13 +1,25 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import UsersListItem from './UsersListItem'
 import { useAuth } from '../contexts/AuthContext';
+import axios from 'axios';
 
 function UsersListContainer() {
-  const {usersList} = useAuth();
+  const [usersList, setUsersList] = useState([]);
+  const {serverUrl, currentUser, token} = useAuth();
+
+  useEffect(() => {
+      fetchAllUsers();
+  }, [])
+  
+
+  const fetchAllUsers = async () => {
+    const allUsers = await axios.get(`${serverUrl}/user`, {headers: {authorization: `Bearer ${token}`}});
+    setUsersList(allUsers.data)
+  }
 
   return (
     <div className='w-50 ms-1'>
-      <h2 className='text-secondary'>Users</h2>
+      <h2>Users</h2>
       <div className=' vh-100 overflow-auto border rounded border-2'>
         {usersList && usersList.map((user) => 
         <UsersListItem key={user.id} user={user} />

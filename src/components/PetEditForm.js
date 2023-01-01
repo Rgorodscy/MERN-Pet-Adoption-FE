@@ -6,7 +6,7 @@ import { useNavigate, useParams }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
 
 function PetEditForm() {
-  const {serverUrl} = useAuth();
+  const {serverUrl, token} = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
   const formGroupClass = 'd-flex align-items-baseline justify-content-between mb-2'
@@ -24,7 +24,7 @@ function PetEditForm() {
   const initialFetch = async () => {
     const petId = id.slice(1);
     try{
-      const petFound = await axios.get(`${serverUrl}/pet/${petId}`);
+      const petFound = await axios.get(`${serverUrl}/pet/${petId}`, {headers: {authorization: `Bearer ${token}`}});
       setPetData(petFound.data[0]);
     }catch(err){
       console.log(err)
@@ -51,7 +51,7 @@ function PetEditForm() {
 
   const putPet = async (editPet) => {
     try{
-      const res = await axios.put(`${serverUrl}/pet/${petData.id}`, editPet);
+      const res = await axios.put(`${serverUrl}/pet/${petData.id}`, editPet, {headers: {authorization: `Bearer ${token}`}});
       navigate('/dashboard')
     }catch(err){
       console.log(err);
@@ -59,7 +59,7 @@ function PetEditForm() {
   }
 
   return (
-    <div className='d-flex flex-column align-items-center m-2 border border-seconday rounded '>
+    <div className='d-flex flex-column align-items-center'>
     <h1>Edit {petData.name}'s info</h1>
     <Form className='w-50' onSubmit={handleEdit}>
       <Form.Group className={formGroupClass}>

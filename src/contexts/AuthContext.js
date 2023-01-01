@@ -11,40 +11,25 @@ export function useAuth () {
 export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [petsList, setPetsList] = useState([]);
-    const [usersList, setUsersList] = useState([]);
-    const [currentUser, setCurrentUser] = useState();
+    const [currentUser, setCurrentUser] = useState(localStorage.getItem('user'));
     const serverUrl = process.env.SERVER_URL || "http://localhost:8080"
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const adminUser = currentUser ? currentUser.isAdmin : null;
+
 
     useEffect(() => {
       setLoading(false);
-      if(currentUser){
-        fetchAllPets();
-        fetchAllUsers();
-      }
-
-    }, [currentUser])
-  
-    const fetchAllPets = async () => {
-      const allPets = await axios.get(`${serverUrl}/pet`);
-      setPetsList(allPets.data)
-    }
-  
-    const fetchAllUsers = async () => {
-      const allUsers = await axios.get(`${serverUrl}/user`);
-      setUsersList(allUsers.data)
-    }
+    }, [currentUser, token])
 
     const value = {
         showLoginModal,
-        setShowLoginModal, 
-        petsList, 
-        setPetsList,
-        usersList,
-        setUsersList,
+        setShowLoginModal,
         currentUser,
         setCurrentUser,
-        serverUrl
+        serverUrl,
+        token,
+        setToken,
+        adminUser
     }
   
     return (

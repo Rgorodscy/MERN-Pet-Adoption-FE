@@ -1,13 +1,13 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
-import { useNavigate }  from 'react-router-dom'
-import BasicComponentsContext from '../contexts/BasicComponentsContext';
+import { Link, useNavigate }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Navbar() {
   const navigate = useNavigate();
-  const {setShowLoginModal, currentUser, setCurrentUser} = useAuth();
+  const {setShowLoginModal, currentUser, setCurrentUser, setToken, adminUser} = useAuth();
 
   const handleLoginLogout = (e) => {
     if(!currentUser) {
@@ -17,26 +17,51 @@ function Navbar() {
     }
     if(currentUser){
       setCurrentUser();
+      setToken();
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
       navigate('/');
       setShowLoginModal(false)
     }
   }
-
+  
   return (
-    <Nav className='d-flex flex-row justify-content-between align-items-center px-5 py-2 bg-primary text-light'>
-      <div>
-      <Button className='me-1' variant='light' onClick={() => navigate('/')}>Home</Button>
-      <Button variant='light' onClick={() => navigate('/search')}>Search</Button>
-      <Button variant='light' onClick={() => navigate('/dashboard')}>Dashboard</Button>
-      <Button variant='light' onClick={() => navigate('/mypets')}>My Pets</Button>
-      <Button variant='light' onClick={() => navigate('/petadd')}>Pet Add</Button>
-      <Button variant='light' onClick={() => navigate('/profile')}>Profile</Button>
+    <Nav className='d-flex flex-row justify-content-between align-items-center px-5 py-2 bg-primary'>
+      <Button className='me-1 p-2 justify-self-center' variant='light' onClick={() => navigate('/search')}>Search</Button>
 
-      </div>
-      <h2>Pet Center</h2>
+      
+      
+      
+      
+      <div className='d-flex'>
+      <Link to={'/'}>
+        <h3 className='text-decoration-none text-light me-3'>Pet Center</h3>
+      </Link>
+      {currentUser && <NavDropdown title='Pages' className='btn btn-light p-0 text-decoration-none text-danger'>
+        <NavDropdown.Item onClick={() => navigate('/mypets')}>My pets</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item onClick={() => navigate('/profile')}>Profile</NavDropdown.Item>
+
+      {adminUser === true &&
+        <div>
+          <NavDropdown.Divider />
+          <NavDropdown.Item onClick={() => navigate('/dashboard')}>Dashboard</NavDropdown.Item>
+          <NavDropdown.Divider />  
+        </div>
+      }
+      {adminUser === true &&
+        <div>
+          <NavDropdown.Item onClick={() => navigate('/petadd')}>Add a Pet</NavDropdown.Item>
+        </div>
+      }
+      </NavDropdown>
+      }
       <div>
-      <Button onClick={handleLoginLogout} variant='light' type='submit'>{currentUser ? "Logout" : "Login" }</Button>
       </div>
+      </div>
+
+      <Button className=' p-2' onClick={handleLoginLogout} variant='light' type='submit'>{currentUser ? "Logout" : "Login" }</Button>
+
     </Nav>
   )
 }

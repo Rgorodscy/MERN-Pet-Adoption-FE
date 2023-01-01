@@ -6,7 +6,7 @@ import { useNavigate }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
 
 function PetAddForm() {
-  const {serverUrl} = useAuth();
+  const {serverUrl, token} = useAuth();
   const navigate = useNavigate();
   const formGroupClass = 'd-flex align-items-baseline justify-content-between mb-2'
   const formLabelClass = 'me-3 text-nowrap'
@@ -43,7 +43,7 @@ function PetAddForm() {
 
   const postPet = async (addPet) => {
     try{
-      const res = await axios.post(`${serverUrl}/pet`, addPet);
+      const res = await axios.post(`${serverUrl}/pet`, addPet, {headers: {authorization: `Bearer ${token}`}});
       navigate('/dashboard')
     }catch(err){
       console.log(err);
@@ -51,7 +51,7 @@ function PetAddForm() {
   }
 
   return (
-    <div className='d-flex flex-column align-items-center m-2 border border-seconday rounded '>
+    <div className='d-flex flex-column align-items-center'>
     <h1>Add a new pet</h1>
     <Form className='w-50' onSubmit={handleAdd}>
       <Form.Group className={formGroupClass}>

@@ -7,7 +7,7 @@ import { useNavigate }  from 'react-router-dom'
 
 function ProfileForm() {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser, serverUrl} = useAuth();
+  const {currentUser, setCurrentUser, serverUrl , token} = useAuth();
   const [newUserInfo, setNewUserInfo] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
@@ -26,13 +26,13 @@ function ProfileForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
    
-    const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo);
+    const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
     setCurrentUser(updatedUser.data);
     navigate("/mypets")
   }
 
   return (
-    <div className='d-flex flex-column align-items-center text-secondary'>
+    <div className='d-flex flex-column align-items-center text-secondary mt-3'>
       <h1>Update Your Profile</h1>
       <Form className='w-50' onSubmit={handleSubmit}>
         <Form.Group>
