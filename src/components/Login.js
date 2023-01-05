@@ -25,7 +25,7 @@ function Login() {
   const postUser = async (user) => {
     try{
       const res = await axios.post(`${serverUrl}/login/`, user);
-      setCurrentUser(res.data.userData);
+      setCurrentUser(JSON.parse(res.data.userData));
       setToken(res.data.token);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', res.data.userData);
@@ -47,9 +47,9 @@ function Login() {
         </Form.Group>
         <Form.Group className='mt-2'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' onChange={handleChange} name="password"></Form.Control>
+          <Form.Control type='password' onChange={handleChange} name="password" ></Form.Control>
         </Form.Group>
-        <Button className='w-100 mt-2' type='submit'>Login</Button>
+        <Button className='w-100 mt-2' type='submit' variant='info'>Login</Button>
       </Form>
     </div>
   )

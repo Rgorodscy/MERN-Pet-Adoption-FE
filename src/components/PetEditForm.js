@@ -12,10 +12,9 @@ function PetEditForm() {
   const formGroupClass = 'd-flex align-items-baseline justify-content-between mb-2'
   const formLabelClass = 'me-3 text-nowrap'
   const formInputClass = 'w-75'
-  const [newPet, setNewPet] = useState({})
-
-  
+  const [image, setImage] = useState();
   const [petData, setPetData] = useState([])
+  const [newPet, setNewPet] = useState(petData)
   
   useEffect(() => {
     initialFetch();
@@ -31,7 +30,7 @@ function PetEditForm() {
     }
   }
 
-
+  console.log(newPet)
 
   const handleChange = (e) => {
     setNewPet({...petData, [e.target.name]: e.target.value})
@@ -46,12 +45,20 @@ function PetEditForm() {
       height: Number(newPet.height),
       weight: Number(newPet.weight),
     }
-    putPet(editPet)
+
+    const petFormData = new FormData();
+    petFormData.append('image', image);
+    for (let key in editPet) {
+      petFormData.append(key, editPet[key]);
+    }
+
+
+    putPet(petFormData)
   }
 
-  const putPet = async (editPet) => {
+  const putPet = async (petFormData) => {
     try{
-      const res = await axios.put(`${serverUrl}/pet/${petData.id}`, editPet, {headers: {authorization: `Bearer ${token}`}});
+      const res = await axios.put(`${serverUrl}/pet/${petData.id}`, petFormData, {headers: {authorization: `Bearer ${token}`}});
       navigate('/dashboard')
     }catch(err){
       console.log(err);
@@ -64,19 +71,19 @@ function PetEditForm() {
     <Form className='w-50' onSubmit={handleEdit}>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Type</Form.Label>
-        <Form.Select className={formInputClass} defaultValue={petData.type} onChange={handleChange} name="type">
+        <Form.Select className={formInputClass} defaultValue={petData.type} onChange={handleChange} name="type" required={true}>
           <option disabled={true}>Select...</option>  
-          <option value={"dog"}>Dog</option>
-          <option value={"cat"}>Cat</option>
+          <option value={"Dog"}>Dog</option>
+          <option value={"Cat"}>Cat</option>
         </Form.Select>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Name</Form.Label>
-        <Form.Control className={formInputClass}  type='text' onChange={handleChange} name="name" defaultValue={petData.name}></Form.Control>
+        <Form.Control className={formInputClass}  type='text' onChange={handleChange} name="name" defaultValue={petData.name} required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Adoption Status</Form.Label>
-        <Form.Select className={formInputClass} onChange={handleChange} name="adoptionStatus" defaultValue={petData.adoptionStatus} >
+        <Form.Select className={formInputClass} onChange={handleChange} name="adoptionStatus" defaultValue={petData.adoptionStatus} required={true}>
           <option disabled={true}>Select...</option>  
           <option value={"Available"}>Available</option>
           <option value={"Fostered"}>Fostered</option>
@@ -85,27 +92,27 @@ function PetEditForm() {
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Image</Form.Label>
-        <Form.Control className={formInputClass} type='file' onChange={handleChange} name="image" defaultValue={petData.image}></Form.Control>
+        <Form.Control className={formInputClass} type='file' onChange={(e) => setImage(e.target.files[0])} name="image" defaultValue={petData.image} required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Height</Form.Label>
-        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="height" defaultValue={petData.height}></Form.Control>
+        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="height" defaultValue={petData.height} required={true}></Form.Control>
       </Form.Group>      
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Weight</Form.Label>
-        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="weight" defaultValue={petData.weight} ></Form.Control>
+        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="weight" defaultValue={petData.weight} required={true}></Form.Control>
       </Form.Group>      
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Color</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="color" defaultValue={petData.color}></Form.Control>
+        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="color" defaultValue={petData.color} required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Bio</Form.Label>
-        <Form.Control className={formInputClass} as='textarea' onChange={handleChange} name="bio" defaultValue={petData.bio}></Form.Control>
+        <Form.Control className={formInputClass} as='textarea' onChange={handleChange} name="bio" defaultValue={petData.bio} required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Hypoallergenic</Form.Label>
-        <Form.Select className={formInputClass} onChange={handleChange} name="hypoallergenic" defaultValue={petData.hypoallergenic} >
+        <Form.Select className={formInputClass} onChange={handleChange} name="hypoallergenic" defaultValue={petData.hypoallergenic} required={true}>
           <option disabled={true}>Select...</option>  
           <option value={true}>Yes</option>
           <option value={false}>No</option>
@@ -113,13 +120,13 @@ function PetEditForm() {
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Dietary Restrictions</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="dietary" defaultValue={petData.dietary}></Form.Control>
+        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="dietary" defaultValue={petData.dietary} required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Breed</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="breed" defaultValue={petData.breed}></Form.Control>
+        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="breed" defaultValue={petData.breed} required={true}></Form.Control>
       </Form.Group>
-      <Button className='mb-2 w-100' type='submit'>Edit Pet</Button>
+      <Button className='mb-2 w-100' disabled={!newPet.type} type='submit'>Edit Pet</Button>
     </Form>
     </div>
   )

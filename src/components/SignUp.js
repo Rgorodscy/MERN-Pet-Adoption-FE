@@ -46,30 +46,30 @@ function Signup({setSignup}) {
       <Form onSubmit={handleSignUp}>
         <Form.Group className='mt-2'>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' onChange={handleChange} name="email"></Form.Control>
+          <Form.Control type='email' onChange={handleChange} name="email" required={true}></Form.Control>
         </Form.Group>
         <Form.Group className='mt-2'>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' onChange={handleChange} name="password"></Form.Control>
+          <Form.Control type='password' onChange={handleChange} name="password" required={true}></Form.Control>
         </Form.Group>
         <Form.Group className='mt-2'>
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type='password' onChange={handleChange} name="confirmPassword"></Form.Control>
+          <Form.Control type='password' onChange={handleChange} name="confirmPassword" required={true}></Form.Control>
         </Form.Group>
         <Form.Group className='mt-2'>
           <Form.Label>First Name</Form.Label>
-          <Form.Control type='text' onChange={handleChange} name="firstName"></Form.Control>
+          <Form.Control type='text' onChange={handleChange} name="firstName" required={true}></Form.Control>
         </Form.Group>
         <Form.Group className='mt-2'>
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type='text' onChange={handleChange} name="lastName"></Form.Control>
+          <Form.Control type='text' onChange={handleChange} name="lastName" required={true}></Form.Control>
         </Form.Group>
         <Form.Group className='mt-2'>
           <Form.Label>Phone Number</Form.Label>
-          <Form.Control type='tel' onChange={handleChange} name="phone"></Form.Control>
+          <Form.Control type='tel' onChange={handleChange} name="phone" required={true}></Form.Control>
         </Form.Group>
 
-        <Button className='w-100 mt-2' type='submit'>Sign Up</Button>
+        <Button className='w-100 mt-2' type='submit' variant='info'>Sign Up</Button>
       </Form>
     </div>
   )

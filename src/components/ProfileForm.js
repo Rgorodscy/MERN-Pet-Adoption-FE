@@ -25,10 +25,11 @@ function ProfileForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
     const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
-    setCurrentUser(updatedUser.data);
-    navigate("/mypets")
+    if(updatedUser){
+      setCurrentUser({...currentUser, ...newUserInfo})
+    }
+    navigate("/")
   }
 
   return (
@@ -37,33 +38,33 @@ function ProfileForm() {
       <Form className='w-50' onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>First Name</Form.Label>
-          <Form.Control type='text' value={currentUser.firstName} name="firstName" onChange={handleChange} onLoad={handleChange}></Form.Control>
+          <Form.Control type='text' defaultValue={currentUser.firstName} name="firstName" onChange={handleChange} ></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Last Name</Form.Label>
-          <Form.Control type='text' value={currentUser.lastName} name="lastName" onChange={handleChange}></Form.Control>
+          <Form.Control type='text' defaultValue={currentUser.lastName} name="lastName" onChange={handleChange} ></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Email</Form.Label>
-          <Form.Control type='email' value={currentUser.email} name="email" onChange={handleChange}></Form.Control>
+          <Form.Control type='email' defaultValue={currentUser.email} name="email" onChange={handleChange} ></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Phone Number</Form.Label>
-          <Form.Control type='tel' value={currentUser.phone} name="phone" onChange={handleChange}></Form.Control>
+          <Form.Control type='tel' defaultValue={currentUser.phone} name="phone" onChange={handleChange} ></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Password</Form.Label>
-          <Form.Control type='password' value={currentUser.password} name="password" onChange={handleChange}></Form.Control>
+          <Form.Control type='password' defaultValue={currentUser.password} name="password" onChange={handleChange} ></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Confirm Password</Form.Label>
-          <Form.Control type='password' value={currentUser.confirmPassword} name="confirmPassword" onChange={handleChange}></Form.Control>
+          <Form.Control type='password' defaultValue={currentUser.confirmPassword} name="confirmPassword" onChange={handleChange} ></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Bio</Form.Label>
-          <Form.Control as='textarea' value={currentUser.bio ? currentUser.bio : ""} name="bio" onChange={handleChange}></Form.Control>
+          <Form.Control as='textarea' defaultValue={currentUser.bio ? currentUser.bio : ""} name="bio" onChange={handleChange} ></Form.Control>
         </Form.Group>
-        <Button type="submit" className='mt-2'>Update Profile</Button>
+        <Button type="submit" variant='info' className='mt-2'>Update Profile</Button>
       </Form>
     </div>
   )

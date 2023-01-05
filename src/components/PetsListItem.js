@@ -7,8 +7,8 @@ function PetsListItem({pet}) {
   
   return (
     <Link to={petPageLink} className='
-    bg-light 
-    text-secondary 
+    bg-info 
+    text-light 
     border-bottom border-secondary rounded 
     d-block text-decoration-none 
     py-1 my-1'>

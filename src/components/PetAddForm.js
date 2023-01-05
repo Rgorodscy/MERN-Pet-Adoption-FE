@@ -15,7 +15,6 @@ function PetAddForm() {
     type: "",
     name: "",
     adoptionStatus: "",
-    image: "",
     height: 0,
     weight: 0,
     color: "",
@@ -24,6 +23,10 @@ function PetAddForm() {
     dietary: "",
     breed: ""
   })
+
+  const [image, setImage] = useState();
+
+
 
   const handleChange = (e) => {
     setNewPet({...newPet, [e.target.name]: e.target.value})
@@ -38,12 +41,19 @@ function PetAddForm() {
       height: Number(newPet.height),
       weight: Number(newPet.weight),
     }
-    postPet(addPet)
+
+    const petFormData = new FormData();
+    petFormData.append('image', image);
+    for (let key in addPet) {
+      petFormData.append(key, addPet[key]);
+    }
+
+    postPet(petFormData)
   }
 
-  const postPet = async (addPet) => {
+  const postPet = async (petFormData) => {
     try{
-      const res = await axios.post(`${serverUrl}/pet`, addPet, {headers: {authorization: `Bearer ${token}`}});
+      const res = await axios.post(`${serverUrl}/pet`, petFormData, {headers: {authorization: `Bearer ${token}`}});
       navigate('/dashboard')
     }catch(err){
       console.log(err);
@@ -56,19 +66,19 @@ function PetAddForm() {
     <Form className='w-50' onSubmit={handleAdd}>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Type</Form.Label>
-        <Form.Select className={formInputClass} defaultValue={0} onChange={handleChange} name="type">
+        <Form.Select className={formInputClass} defaultValue={0} onChange={handleChange} name="type" required={true}>
           <option value={0} disabled={true}>Select...</option>  
-          <option value={"dog"}>Dog</option>
-          <option value={"cat"}>Cat</option>
+          <option value={"Dog"}>Dog</option>
+          <option value={"Cat"}>Cat</option>
         </Form.Select>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Name</Form.Label>
-        <Form.Control className={formInputClass}  type='text' onChange={handleChange} name="name"></Form.Control>
+        <Form.Control className={formInputClass}  type='text' onChange={handleChange} name="name" required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Adoption Status</Form.Label>
-        <Form.Select className={formInputClass} defaultValue={0} onChange={handleChange} name="adoptionStatus">
+        <Form.Select className={formInputClass} defaultValue={0} onChange={handleChange} name="adoptionStatus" required={true}>
           <option value={0} disabled={true}>Select...</option>  
           <option value={"Available"}>Available</option>
           <option value={"Fostered"}>Fostered</option>
@@ -77,27 +87,27 @@ function PetAddForm() {
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Image</Form.Label>
-        <Form.Control className={formInputClass} type='file' onChange={handleChange} name="image"></Form.Control>
+        <Form.Control className={formInputClass} type='file' onChange={(e) => setImage(e.target.files[0])} name="image" required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Height</Form.Label>
-        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="height"></Form.Control>
+        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="height" required={true}></Form.Control>
       </Form.Group>      
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Weight</Form.Label>
-        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="weight"></Form.Control>
+        <Form.Control className={formInputClass} type='number' onChange={handleChange} name="weight" required={true}></Form.Control>
       </Form.Group>      
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Color</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="color"></Form.Control>
+        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="color" required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Bio</Form.Label>
-        <Form.Control className={formInputClass} as='textarea' onChange={handleChange} name="bio"></Form.Control>
+        <Form.Control className={formInputClass} as='textarea' onChange={handleChange} name="bio" required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Hypoallergenic</Form.Label>
-        <Form.Select className={formInputClass} defaultValue={0} onChange={handleChange} name="hypoallergenic">
+        <Form.Select className={formInputClass} defaultValue={0} onChange={handleChange} name="hypoallergenic" required={true}>
           <option value={false} disabled={true}>Select...</option>  
           <option value={true}>Yes</option>
           <option value={false}>No</option>
@@ -105,11 +115,11 @@ function PetAddForm() {
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Dietary Restrictions</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="dietary"></Form.Control>
+        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="dietary" required={true}></Form.Control>
       </Form.Group>
       <Form.Group className={formGroupClass}>
         <Form.Label className={formLabelClass}>Breed</Form.Label>
-        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="breed"></Form.Control>
+        <Form.Control className={formInputClass} type='text' onChange={handleChange} name="breed" required={true}></Form.Control>
       </Form.Group>
       <Button className='mb-2 w-100' type='submit'>Add Pet</Button>
     </Form>

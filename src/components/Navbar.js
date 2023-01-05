@@ -1,13 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
+import Modal from 'react-bootstrap/Modal'
+
 import { Link, useNavigate }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import SearchBar from './SearchBar'
+import CloseButton from 'react-bootstrap/esm/CloseButton'
+
 
 function Navbar() {
   const navigate = useNavigate();
   const {setShowLoginModal, currentUser, setCurrentUser, setToken, adminUser} = useAuth();
+  const [searchClicked, setSearchClicked] = useState(false)
 
   const handleLoginLogout = (e) => {
     if(!currentUser) {
@@ -25,42 +34,34 @@ function Navbar() {
     }
   }
   
+
   return (
-    <Nav className='d-flex flex-row justify-content-between align-items-center px-5 py-2 bg-primary'>
-      <Button className='me-1 p-2 justify-self-center' variant='light' onClick={() => navigate('/search')}>Search</Button>
-
-      
-      
-      
-      
-      <div className='d-flex'>
-      <Link to={'/'}>
-        <h3 className='text-decoration-none text-light me-3'>Pet Center</h3>
-      </Link>
-      {currentUser && <NavDropdown title='Pages' className='btn btn-light p-0 text-decoration-none text-danger'>
-        <NavDropdown.Item onClick={() => navigate('/mypets')}>My pets</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item onClick={() => navigate('/profile')}>Profile</NavDropdown.Item>
-
-      {adminUser === true &&
-        <div>
-          <NavDropdown.Divider />
-          <NavDropdown.Item onClick={() => navigate('/dashboard')}>Dashboard</NavDropdown.Item>
-          <NavDropdown.Divider />  
-        </div>
-      }
-      {adminUser === true &&
-        <div>
-          <NavDropdown.Item onClick={() => navigate('/petadd')}>Add a Pet</NavDropdown.Item>
-        </div>
-      }
-      </NavDropdown>
-      }
-      <div>
+    <Nav className='d-flex flex-column px-5 py-2 bg-info'>
+      <div className='d-flex flex-row justify-content-between'>
+        <Button className='me-1 p-2 justify-self-center' variant='light' onClick={() => setSearchClicked(!searchClicked)}>Search</Button>
+        <h3 onClick={() => navigate('/')} className='text-light me-3' role='button'>Pet Center</h3>
+        <Button className=' p-2' onClick={handleLoginLogout} variant='light' type='submit'>{currentUser ? "Logout" : "Login" }</Button>
       </div>
+      <div className='d-flex justify-content-center'>
+        {currentUser && <div className='d-flex'>
+          <Button className='btn-light me-2' onClick={() => navigate('/mypets')}>My Pets</Button>
+          <Button className='btn-light me-2' onClick={() => navigate('/myprofile')}>Profile</Button>
+          {adminUser === true &&
+            <Button className='btn-light me-2' onClick={() => navigate('/dashboard')}>Dashboard</Button>
+          }
+          {adminUser === true &&
+            <Button className='btn-light me-2' onClick={() => navigate('/petadd')}>Add a Pet</Button>
+          }
+        </div>}
+
       </div>
 
-      <Button className=' p-2' onClick={handleLoginLogout} variant='light' type='submit'>{currentUser ? "Logout" : "Login" }</Button>
+        <Modal show={searchClicked} backdrop='static' >
+          <div className='d-flex flex-column align-items-center text-secondary m-1 p-2 border border-secondary rounded'>
+          <CloseButton onClick={() => setSearchClicked(!searchClicked)} className='align-self-end'/>
+          <SearchBar setSearchClicked={setSearchClicked} />
+          </div>
+        </Modal>
 
     </Nav>
   )

@@ -1,14 +1,17 @@
 import React from 'react'
 import PetCard from './PetCard'
+import Col from 'react-bootstrap/Col';
 
 function SearchResultsContainer({searchResults}) {
   return (
     <div className='container mt-4'>
       <div className='row justify-content-center'>
-        {searchResults.map(pet => 
-          <div className='w-25 m-2'>
-            <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
-          </div>
+        {searchResults.map((pet) => 
+          <Col 
+          xs={{ span: 6 }} sm={{ span: 4 }} md={{ span: 3 }}
+          className='m-2'>
+            <PetCard key={pet.id} pet={pet} />
+          </Col>
         )}
       </div>
     </div>

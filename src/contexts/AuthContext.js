@@ -11,11 +11,10 @@ export function useAuth () {
 export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [currentUser, setCurrentUser] = useState(localStorage.getItem('user'));
+    const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')));
     const serverUrl = process.env.SERVER_URL || "http://localhost:8080"
     const [token, setToken] = useState(localStorage.getItem('token'));
     const adminUser = currentUser ? currentUser.isAdmin : null;
-
 
     useEffect(() => {
       setLoading(false);

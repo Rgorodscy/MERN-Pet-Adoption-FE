@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import PetCard from '../components/PetCard'
 import Form from 'react-bootstrap/Form'
 import {useAuth} from '../contexts/AuthContext'
+import Col from 'react-bootstrap/Col';
 
 function MyPets() {
-  const [userPetsList, setUserPetsList] = useState([])
   const {currentUser} = useAuth();
+  const [userPetsList, setUserPetsList] = useState(currentUser.myPets)
   const [savedPets, setSavedPets] = useState(false)
     
   useEffect(() => {
@@ -26,7 +27,11 @@ function MyPets() {
       {!userPetsList[0] && !savedPets ? <h2>You currently do not own or foster any pets</h2> : ""}
       {!userPetsList[0] && savedPets ? <h2>You currently do not have any pets saved</h2> : ""}
       {userPetsList.map(pet => 
-      <PetCard key={pet.id} pet={pet} />
+      <Col 
+      xs={{ span: 6 }} sm={{ span: 4 }} md={{ span: 3 }}
+      className='m-2'>
+        <PetCard key={pet.id} pet={pet} />
+      </Col>
       )}
     </div>
   )

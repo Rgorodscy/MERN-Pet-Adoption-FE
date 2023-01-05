@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from '../components/Navbar'
 import Homepage from '../pages/Homepage';
 import MyPets from '../pages/MyPets';
-import Profile from '../pages/Profile';
+import ProfileEdit from '../pages/ProfileEdit';
 import Pet from '../pages/Pet';
 import PetAddEdit from '../pages/PetAddEdit';
 import Search from '../pages/Search';
@@ -12,6 +12,7 @@ import Dashboard from '../pages/Dashboard';
 import { AuthProvider } from '../contexts/AuthContext';
 import PrivateRoute from '../components/PrivateRoute';
 import AdminRoute from '../components/AdminRoute'
+import UserProfile from '../pages/UserProfile';
 
 function MainComponent() {
 
@@ -28,9 +29,19 @@ function MainComponent() {
               <Pet />
             </PrivateRoute>
             } />
-            <Route path='/profile' element={
+            <Route path='/myprofile' element={
             <PrivateRoute>
-              <Profile />
+              <UserProfile />
+            </PrivateRoute>
+            } />            
+            <Route path='/editprofile' element={
+            <PrivateRoute>
+              <ProfileEdit />
+            </PrivateRoute>
+            } />
+            <Route path='/profile/:id' element={
+            <PrivateRoute>
+              <UserProfile />
             </PrivateRoute>
             } />
             <Route path='/mypets' element={
@@ -38,7 +49,6 @@ function MainComponent() {
               <MyPets />
             </PrivateRoute>
             } />
-            
             <Route path='/petadd' element={
             <PrivateRoute>
               <AdminRoute>

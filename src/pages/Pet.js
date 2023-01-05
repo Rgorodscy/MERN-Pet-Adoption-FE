@@ -35,7 +35,7 @@ function Pet() {
   let adoptionStatusAlertColor;
 
   if(petData.adoptionStatus === "Available") {
-    adoptionStatusAlertColor = 'success'
+    adoptionStatusAlertColor = 'info'
   } else if (petData.adoptionStatus === "Fostered"){
     adoptionStatusAlertColor = 'primary'
   } else {
@@ -99,7 +99,7 @@ function Pet() {
       
         <Card className='text-secondary'>
           <Card.Body className='d-flex flex-column align-items-center'>
-            <Image height='240px' width='240px' className='rounded' />
+            <Image src={petData.image} height='240px' width='240px' className='rounded' />
             <h1>{petData.name}</h1>
             <div className='w-50'>
               <p className='border border-secondary rounded'>Details:  <br/>
@@ -114,7 +114,7 @@ function Pet() {
               <Alert variant={adoptionStatusAlertColor}>{petData.adoptionStatus}</Alert>
             </div>
             <div className='d-flex w-50 justify-content-around mb-3'>
-            {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Adopt")} variant='success'>Adopt</Button> || petIsMyPet && petData.adoptionStatus === "Fostered" && <Button onClick={() => handleAdoptFoster("Adopt")}>Adopt</Button>}
+            {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Adopt")} variant='info'>Adopt</Button> || petIsMyPet && petData.adoptionStatus === "Fostered" && <Button onClick={() => handleAdoptFoster("Adopt")}>Adopt</Button>}
             {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Foster")} >Foster</Button>}
             {petIsMyPet && <Button onClick={handleReturn} variant='secondary'>Return</Button>}
               <Link onClick={handleSave} className='h4'>
