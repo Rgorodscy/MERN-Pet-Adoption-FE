@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext'
 export default function PrivateRoute({ redirectPath = "/", children, }) {
   const { adminUser } = useAuth();
   
-    if (adminUser != true) {
+    if (adminUser !== true) {
         return <Navigate to={redirectPath} replace />;
         }
     

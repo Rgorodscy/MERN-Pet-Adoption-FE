@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import {Form, Button} from 'react-bootstrap'
 import axios from 'axios';
 import { useNavigate, useParams }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
@@ -59,7 +58,9 @@ function PetEditForm() {
   const putPet = async (petFormData) => {
     try{
       const res = await axios.put(`${serverUrl}/pet/${petData.id}`, petFormData, {headers: {authorization: `Bearer ${token}`}});
-      navigate('/dashboard')
+      if(res){
+        navigate('/dashboard')
+      }
     }catch(err){
       console.log(err);
     }

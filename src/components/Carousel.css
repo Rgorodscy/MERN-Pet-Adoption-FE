@@ -1,33 +1,23 @@
-.carousel {
-    overflow: hidden;
-}
-
-.inner {
-    white-space: nowrap;
-    transition: transform 0.3s;
-}
-
-.carousel-item {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    width: auto;
-    background-color: green;
-    color: #fff;
-}
-
-.indicators {
+.image {
+    height: 55vh;
     display: flex;
     justify-content: center;
-}
+    align-items: center;
+  }
+  
+.carousel {
+    width: 600px;
+    height: 400px;
+    border-radius: 10px;
+  }
+  
+@media only screen and (max-width: 600px) {
+    .image {
+        height: 40vh;
+      }
 
-.indicators > button {
-    margin: 5px;
-    z-index: 1000;
-}
-
-.indicators > button.active {
-    background-color: green;
-    color: #fff;
-}
+    .carousel {
+        width: 85vw;
+        margin-bottom: 1rem;
+      }
+} 

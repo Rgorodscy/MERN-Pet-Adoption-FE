@@ -1,83 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import './Carousel.css';
+import React from 'react';
+import {Carousel, Image} from 'react-bootstrap';
+import './Carousel.css'
 
-export const CarouselItem = ({children, width}) => {
+function PetsCarousel() {
+  const imageClasslist = "d-block w-100 rounded image"
+  
     return (
-        <div className='carousel-item' style={{width: width}}>
-            {children}
-        </div>
-    );
-};
-
-function Carousel({children}) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-    console.log(children)
-
-    const updateIndex = (newIndex) => {
-        if(newIndex < 0){
-            newIndex = React.Children.count(children) -1;
-        } else if (newIndex >= React.Children.count(children)) {
-            newIndex = 0;
-        }
-        setActiveIndex(newIndex)
-    }
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         if(!paused){
-    //             updateIndex(activeIndex + 1);
-    //         }
-    //     }, 1000);
-
-    //     return () => {
-    //         if(interval){
-    //             clearInterval(interval)
-    //         };
-    //     };
-    // });
-
-    console.log(children)
-    
-    return (
-    <div className='carousel' onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-        <div className='inner' style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-            {React.Children.map(children, (child, index) => 
-                React.cloneElement(child, { width: "100%" })
-            )}
-        </div>
-        <div className='indicators'>
-            <Button
-                onClick={() => {
-                    updateIndex(activeIndex - 1)
-                }}
-                >Prev
-            </Button>
-            {React.Children.map(children, (child, index) => {
-                return (
-                    <Button
-                    className={`${index === activeIndex ? 'active' : ''}`}
-                    onClick={() => {
-                        updateIndex(index);
-                    }}
-                    >
-                        {index+1}
-                    </Button>
-                )
-            })}
-            <Button
-                onClick={() => {
-                    updateIndex(activeIndex + 1)
-                }}
-                >Next
-            </Button>
-        </div>
-    </div>
-  )
+    <Carousel className='h-25 carousel'>
+      <Carousel.Item>
+        <Image
+          className={imageClasslist}
+          src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1672847032/friends-gf702ac59c_1920_rda8zp.jpg"
+          alt="First slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <Image
+          className={imageClasslist}
+          src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1672847032/cat-gf903b0144_1920_lx5b2b.jpg"
+          alt="Second slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <Image
+          className={imageClasslist}
+          src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1672847032/corgi-gdc40b39af_1920_p3cahk.jpg"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <Image
+          className={imageClasslist}
+          src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1672847032/kitty-g9c5a192f4_1920_q0s8oj.jpg"
+          alt="Forth slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <Image
+          className={imageClasslist}
+          src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1672847036/dachshund-gd89d428d1_1920_wtwb5a.jpg"
+          alt="Fifth slide"
+        />
+      </Carousel.Item>
+    </Carousel>
+  );
 }
 
-
-
-export default Carousel
+export default PetsCarousel;

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import PetsListItem from './PetsListItem'
-import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
 
 function PetsListContainer() {
   const [petsList, setPetsList] = useState([]);
-  const {serverUrl, currentUser} = useAuth();
+  const {serverUrl} = useAuth();
 
   useEffect(() => {
       fetchAllPets();

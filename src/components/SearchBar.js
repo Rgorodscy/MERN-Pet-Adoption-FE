@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
-import { useAuth } from '../contexts/AuthContext'
-import axios from 'axios';
-import { Link, useNavigate }  from 'react-router-dom'
+import {Form, Button} from 'react-bootstrap'
+import { useNavigate }  from 'react-router-dom'
 
 function SearchBar({setSearchClicked}) {
   const [advancedSearch, setAdvancedSearch] = useState(false);
   const [searchObject, setSearchObject] = useState({});
-  const {currentUser, serverUrl} = useAuth();
-  const [searched, setSearched] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,7 +28,7 @@ function SearchBar({setSearchClicked}) {
         <Form.Check className='align-self-center' type='switch' id= 'basic-advanced-search' label='Advanced Search' onChange={() => setAdvancedSearch(!advancedSearch)} />
         <Form.Group className={formGroupClassList}>
           <Form.Label className={formLabelClassList}>Type</Form.Label>
-          <Form.Select defaultValue={0} onChange={handleChange} disabled={searched} name='type'>
+          <Form.Select defaultValue={0} onChange={handleChange}  name='type'>
             <option value={0} disabled>Select...</option>
             <option value={"Dog"} >Dog</option>
             <option value={"Cat"} >Cat</option>
@@ -43,7 +38,7 @@ function SearchBar({setSearchClicked}) {
         <> 
           <Form.Group className={formGroupClassList}>
             <Form.Label className={formLabelClassList}>Adoption Status</Form.Label>
-            <Form.Select defaultValue={0} onChange={handleChange} disabled={searched} name='adoptionStatus'>
+            <Form.Select defaultValue={0} onChange={handleChange}  name='adoptionStatus'>
               <option value={0} disabled={true}>Select...</option>  
               <option value={"Available"}>Available</option>
               <option value={"Fostered"}>Fostered</option>
@@ -52,15 +47,15 @@ function SearchBar({setSearchClicked}) {
           </Form.Group>
             <Form.Group className={formGroupClassList}>
             <Form.Label className={formLabelClassList}>Height</Form.Label>
-          <Form.Control type='text' onChange={handleChange} name='height' disabled={searched}></Form.Control>
+          <Form.Control type='text' onChange={handleChange} name='height' ></Form.Control>
           </Form.Group>      
           <Form.Group className={formGroupClassList}>
             <Form.Label className={formLabelClassList}>Weight</Form.Label>
-            <Form.Control type='text' onChange={handleChange} name='weight' disabled={searched}></Form.Control>
+            <Form.Control type='text' onChange={handleChange} name='weight' ></Form.Control>
           </Form.Group>  
           <Form.Group className={formGroupClassList}>
             <Form.Label className={formLabelClassList}>Name</Form.Label>
-            <Form.Control type='text' onChange={handleChange} name='name' disabled={searched}></Form.Control>
+            <Form.Control type='text' onChange={handleChange} name='name' ></Form.Control>
           </Form.Group>    
         </>}
         <Button type='submit' className="mt-2" variant='info'>Search</Button>

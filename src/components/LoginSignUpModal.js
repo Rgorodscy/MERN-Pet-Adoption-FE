@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
+import {Form} from 'react-bootstrap'
 import Login from './Login'
 import Signup from './Signup'
-import Form from 'react-bootstrap/Form'
 
 
 function LoginSignUpModal() {

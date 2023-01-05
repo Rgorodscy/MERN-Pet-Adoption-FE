@@ -1,6 +1,6 @@
 import React from 'react'
-import PetCard from './PetCard'
 import Col from 'react-bootstrap/Col';
+import PetCard from './PetCard'
 
 function SearchResultsContainer({searchResults}) {
   return (

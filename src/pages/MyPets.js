@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import PetCard from '../components/PetCard'
-import Form from 'react-bootstrap/Form'
-import {useAuth} from '../contexts/AuthContext'
-import Col from 'react-bootstrap/Col';
+import React, { useEffect, useState } from 'react';
+import {Form, Col} from 'react-bootstrap';
+import {useAuth} from '../contexts/AuthContext';
+import PetCard from '../components/PetCard';
 
 function MyPets() {
   const {currentUser} = useAuth();

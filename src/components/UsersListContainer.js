@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import UsersListItem from './UsersListItem'
-import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
+import UsersListItem from './UsersListItem'
 
 function UsersListContainer() {
   const [usersList, setUsersList] = useState([]);
-  const {serverUrl, currentUser, token} = useAuth();
+  const {serverUrl, token} = useAuth();
 
   useEffect(() => {
       fetchAllUsers();

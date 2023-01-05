@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from '../components/Navbar'
+import { AuthProvider } from '../contexts/AuthContext';
 import Homepage from '../pages/Homepage';
 import MyPets from '../pages/MyPets';
 import ProfileEdit from '../pages/ProfileEdit';
@@ -9,10 +9,10 @@ import Pet from '../pages/Pet';
 import PetAddEdit from '../pages/PetAddEdit';
 import Search from '../pages/Search';
 import Dashboard from '../pages/Dashboard';
-import { AuthProvider } from '../contexts/AuthContext';
+import UserProfile from '../pages/UserProfile';
+import Navbar from '../components/Navbar'
 import PrivateRoute from '../components/PrivateRoute';
 import AdminRoute from '../components/AdminRoute'
-import UserProfile from '../pages/UserProfile';
 
 function MainComponent() {
 

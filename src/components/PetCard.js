@@ -1,8 +1,5 @@
 import React from 'react'
-import Card from 'react-bootstrap/Card'
-import Image from 'react-bootstrap/Image'
-import Alert from 'react-bootstrap/Alert'
-import Button from 'react-bootstrap/Button'
+import {Card, Image, Alert} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 function PetCard({pet}) {

@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
+import {Form, Button} from 'react-bootstrap'
 import axios from 'axios';
 import { useNavigate }  from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser, serverUrl, setShowLoginModal, setToken} = useAuth();
+  const {setCurrentUser, serverUrl, setShowLoginModal, setToken} = useAuth();
   const [user, setUser] = useState({
     email: "",
     password: "",

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import SearchBar from '../components/SearchBar'
-import SearchResultsContainer from '../components/SearchResultsContainer'
-import { useAuth } from '../contexts/AuthContext'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext'
+import SearchResultsContainer from '../components/SearchResultsContainer'
 
 
 function Search() {
   const [searchResults, setSearchResults] = useState([])
   const {serverUrl} = useAuth();
-  // const [searchObj, setSearchObj] = useState({})
-
-  // search with the data from the searchbar component, put in the url the search params (set)
-
   const search = useLocation().search;
   const queryParams = new URLSearchParams(search);
   const type = queryParams.get('type'); 

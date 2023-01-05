@@ -1,12 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react'
-import Card from 'react-bootstrap/Card'
-import Image from 'react-bootstrap/Image'
-import Alert from 'react-bootstrap/Alert'
-import Button from 'react-bootstrap/Button'
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import React, {useState, useEffect} from 'react'
+import {Card, Image, Alert, Button} from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
+import { useAuth } from '../contexts/AuthContext';
 
 
 function Pet() {
@@ -58,8 +55,10 @@ function Pet() {
     if(petIsSaved){
       try{
         const saveRes = await axios.delete(`${serverUrl}/pet/${petId}/save`, {data: reqBody, headers: {authorization: `Bearer ${token}`}});
-        const newSavedPetsArray = currentUser.savedPets.filter((pet) => pet.id !== petId);
-        setCurrentUser({...currentUser, savedPets: newSavedPetsArray});
+        if(saveRes){
+          const newSavedPetsArray = currentUser.savedPets.filter((pet) => pet.id !== petId);
+          setCurrentUser({...currentUser, savedPets: newSavedPetsArray});
+        }
       }catch(err){
         console.log(err);
       };
@@ -114,7 +113,7 @@ function Pet() {
               <Alert variant={adoptionStatusAlertColor}>{petData.adoptionStatus}</Alert>
             </div>
             <div className='d-flex w-50 justify-content-around mb-3'>
-            {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Adopt")} variant='info'>Adopt</Button> || petIsMyPet && petData.adoptionStatus === "Fostered" && <Button onClick={() => handleAdoptFoster("Adopt")}>Adopt</Button>}
+            {(petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Adopt")} variant='info'>Adopt</Button>) || (petIsMyPet && petData.adoptionStatus === "Fostered" && <Button onClick={() => handleAdoptFoster("Adopt")}>Adopt</Button>)}
             {petData.adoptionStatus === "Available" && <Button onClick={() => handleAdoptFoster("Foster")} >Foster</Button>}
             {petIsMyPet && <Button onClick={handleReturn} variant='secondary'>Return</Button>}
               <Link onClick={handleSave} className='h4'>

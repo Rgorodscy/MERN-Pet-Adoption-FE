@@ -1,16 +1,8 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Nav from 'react-bootstrap/Nav'
-import Modal from 'react-bootstrap/Modal'
-
-import { Link, useNavigate }  from 'react-router-dom'
+import {Button, Nav, Modal, CloseButton} from 'react-bootstrap'
+import { useNavigate }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import SearchBar from './SearchBar'
-import CloseButton from 'react-bootstrap/esm/CloseButton'
 
 
 function Navbar() {

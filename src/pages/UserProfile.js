@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import Button from 'react-bootstrap/Button'
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import {Button} from 'react-bootstrap'
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
 import PetCard from '../components/PetCard'
 
 function UserProfile() {
