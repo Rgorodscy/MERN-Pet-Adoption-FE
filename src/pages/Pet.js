@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 
 function Pet() {
-  const {serverUrl, currentUser, setCurrentUser, token} = useAuth();
+  const {serverUrl, currentUser, setCurrentUser, token, setToastMessage, setShowNotificationToast} = useAuth();
   const { id } = useParams();
   const [petData, setPetData] = useState({})
   const petId = id.slice(1);
@@ -25,7 +25,10 @@ function Pet() {
       const petFound = await axios.get(`${serverUrl}/pet/${petId}`);
       setPetData(petFound.data[0]);
     }catch(err){
-      console.log(err)
+      console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 
@@ -50,6 +53,9 @@ function Pet() {
         setCurrentUser({...currentUser, savedPets: [...currentUser.savedPets,  saveRes.data]})
       }catch(err){
         console.log(err);
+        const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+        setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+        setShowNotificationToast(true); 
       };
     }
     if(petIsSaved){
@@ -61,6 +67,9 @@ function Pet() {
         }
       }catch(err){
         console.log(err);
+        const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+        setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+        setShowNotificationToast(true); 
       };
     }
   }
@@ -76,6 +85,9 @@ function Pet() {
       setPetData(adoptFosterRes.data);
     }catch(err){
       console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 
@@ -90,6 +102,9 @@ function Pet() {
       setPetData(returnRes.data);
     }catch(err){
       console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 

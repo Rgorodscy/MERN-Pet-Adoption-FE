@@ -7,7 +7,7 @@ import SearchResultsContainer from '../components/SearchResultsContainer'
 
 function Search() {
   const [searchResults, setSearchResults] = useState([])
-  const {serverUrl} = useAuth();
+  const {serverUrl, setToastMessage, setShowNotificationToast} = useAuth();
   const search = useLocation().search;
   const queryParams = new URLSearchParams(search);
   const type = queryParams.get('type'); 
@@ -32,7 +32,10 @@ function Search() {
       const searchResponse = await axios.get(`${serverUrl}/pet/`, {params: searchObject});
       setSearchResults(searchResponse.data)
     }catch(err){
-      console.log(err)
+      console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 

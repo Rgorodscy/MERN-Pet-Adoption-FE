@@ -5,7 +5,7 @@ import LoginSignUpModal from '../components/LoginSignUpModal'
 import PetsCarousel from '../components/Carousel';
 
 function Homepage() {
-  const {showLoginModal, setShowLoginModal, currentUser} = useAuth();
+  const {showLoginModal, setShowLoginModal, currentUser, error} = useAuth();
 
   return (
     <div className='d-flex flex-column align-items-center mt-3 text-secondary'>
@@ -42,6 +42,7 @@ function Homepage() {
           </div>
         }
       </Modal>
+
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { useNavigate, useParams }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
 
 function PetEditForm() {
-  const {serverUrl, token} = useAuth();
+  const {serverUrl, token, setShowNotificationToast, setToastMessage} = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
   const formGroupClass = 'd-flex align-items-baseline justify-content-between mb-2'
@@ -25,7 +25,10 @@ function PetEditForm() {
       const petFound = await axios.get(`${serverUrl}/pet/${petId}`, {headers: {authorization: `Bearer ${token}`}});
       setPetData(petFound.data[0]);
     }catch(err){
-      console.log(err)
+      console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 
@@ -59,10 +62,15 @@ function PetEditForm() {
     try{
       const res = await axios.put(`${serverUrl}/pet/${petData.id}`, petFormData, {headers: {authorization: `Bearer ${token}`}});
       if(res){
-        navigate('/dashboard')
+        navigate('/dashboard');
+        setToastMessage({variant: 'Info', messageType: 'Success', message: "Pet updated successfully!"});
+        setShowNotificationToast(true); 
       }
     }catch(err){
       console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 

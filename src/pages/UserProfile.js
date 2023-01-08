@@ -9,7 +9,7 @@ function UserProfile() {
     const navigate = useNavigate()
     const { id } = useParams();
     const [userData, setUserData] = useState({});
-    const {serverUrl, currentUser, token} = useAuth();
+    const {serverUrl, currentUser, token, setToastMessage, setShowNotificationToast} = useAuth();
     const userId = id ? id.slice(1) : currentUser.id;
     const isCurrentUserProfile = id ? false : true;
     
@@ -22,30 +22,36 @@ function UserProfile() {
           const userFound = await axios.get(`${serverUrl}/user/${userId}`);
           setUserData(userFound.data);
         }catch(err){
-          console.log(err)
+          console.log(err);
+          const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+          setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+          setShowNotificationToast(true); 
         }
-      }
+    }
 
-      const handleAdmin = async () => {
-        try{
-          const newUserInfo = {
-            ...userData,
-            isAdmin: true
-          }
-          const updatedUser = await axios.put(`${serverUrl}/user/${userId}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
-          if(updatedUser){
-            alert("User Updated");
-            setUserData({...userData, isAdmin: true})
-          }
-          
-        }catch(err){
-          console.log(err)
+    const handleAdmin = async () => {
+      try{
+        const newUserInfo = {
+          ...userData,
+          isAdmin: true
         }
+        const updatedUser = await axios.put(`${serverUrl}/user/${userId}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
+        if(updatedUser){
+          setUserData({...userData, isAdmin: true});
+          setToastMessage({variant: 'Info', messageType: 'Success', message: "User is now an admin."});
+          setShowNotificationToast(true); 
+        }
+        
+      }catch(err){
+        console.log(err);
+        const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+        setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+        setShowNotificationToast(true); 
       }
+    }
 
-      const divClassList = 'd-flex';
-      const labelClassList = 'me-2 text-capitalize';
-
+    const divClassList = 'd-flex';
+    const labelClassList = 'me-2 text-capitalize';
 
     return (
       

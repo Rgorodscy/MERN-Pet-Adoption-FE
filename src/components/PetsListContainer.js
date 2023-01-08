@@ -6,15 +6,22 @@ import { Spinner } from 'react-bootstrap';
 
 function PetsListContainer() {
   const [petsList, setPetsList] = useState([]);
-  const {serverUrl} = useAuth();
+  const {serverUrl, setShowNotificationToast, setToastMessage} = useAuth();
 
   useEffect(() => {
       fetchAllPets();
   }, [])
   
   const fetchAllPets = async () => {
-    const allPets = await axios.get(`${serverUrl}/pet`);
-    setPetsList(allPets.data)
+    try{
+      const allPets = await axios.get(`${serverUrl}/pet`);
+      setPetsList(allPets.data)
+    }catch(err){
+      console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true);      
+    }
   }
 
   return (

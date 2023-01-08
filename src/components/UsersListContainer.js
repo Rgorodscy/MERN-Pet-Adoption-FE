@@ -5,7 +5,7 @@ import UsersListItem from './UsersListItem'
 import {Spinner} from 'react-bootstrap'
 function UsersListContainer() {
   const [usersList, setUsersList] = useState([]);
-  const {serverUrl, token} = useAuth();
+  const {serverUrl, token, setShowNotificationToast, setToastMessage} = useAuth();
 
   useEffect(() => {
       fetchAllUsers();
@@ -13,8 +13,15 @@ function UsersListContainer() {
   
 
   const fetchAllUsers = async () => {
-    const allUsers = await axios.get(`${serverUrl}/user`, {headers: {authorization: `Bearer ${token}`}});
-    setUsersList(allUsers.data)
+    try{
+      const allUsers = await axios.get(`${serverUrl}/user`, {headers: {authorization: `Bearer ${token}`}});
+      setUsersList(allUsers.data)
+    }catch(err){
+      console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true);      
+    }
   }
 
   return (

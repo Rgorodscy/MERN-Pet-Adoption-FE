@@ -13,6 +13,8 @@ export function AuthProvider({ children }) {
     const serverUrl = process.env.REACT_APP_SERVER_URL
     const [token, setToken] = useState(localStorage.getItem('token'));
     const adminUser = currentUser ? currentUser.isAdmin : null;
+    const [toastMessage, setToastMessage] = useState({variant: '', messageType: '', message: ''});
+    const [showNotificationToast, setShowNotificationToast] = useState(false);
 
     useEffect(() => {
       setLoading(false);
@@ -26,7 +28,11 @@ export function AuthProvider({ children }) {
         serverUrl,
         token,
         setToken,
-        adminUser
+        adminUser,
+        toastMessage,
+        setToastMessage,
+        showNotificationToast,
+        setShowNotificationToast
     }
   
     return (

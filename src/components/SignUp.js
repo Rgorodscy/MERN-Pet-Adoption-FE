@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 
 function Signup({setSignup}) {
-  const {serverUrl} = useAuth()
+  const {serverUrl, setToastMessage, setShowNotificationToast} = useAuth()
   const navigate = useNavigate();
   const [newUser, setNewUser] = useState({
     email: "",
@@ -31,11 +31,15 @@ function Signup({setSignup}) {
       const res = await axios.post(`${serverUrl}/signup/`, newUser);
       if(res){
         navigate('/');
-        setSignup(false)
+        setSignup(false);
+        setToastMessage({variant: 'Info', messageType: 'Sucess', message: 'User created sucessfully!'});
+        setShowNotificationToast(true);  
       }
     }catch(err){
       console.log(err);
-      alert(err.response.data);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true);    
     }
   }
 

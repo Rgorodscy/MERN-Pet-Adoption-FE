@@ -13,6 +13,7 @@ import UserProfile from '../pages/UserProfile';
 import Navbar from '../components/Navbar'
 import PrivateRoute from '../components/PrivateRoute';
 import AdminRoute from '../components/AdminRoute'
+import NotificationToast from '../components/NotificationToast';
 
 function MainComponent() {
 
@@ -71,6 +72,7 @@ function MainComponent() {
             </PrivateRoute>
             } />
           </Routes>
+          <NotificationToast />
         </AuthProvider>
       </BrowserRouter>
     </div>

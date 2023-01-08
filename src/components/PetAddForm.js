@@ -5,7 +5,7 @@ import { useNavigate }  from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext';
 
 function PetAddForm() {
-  const {serverUrl, token} = useAuth();
+  const {serverUrl, token, setShowNotificationToast, setToastMessage} = useAuth();
   const navigate = useNavigate();
   const formGroupClass = 'd-flex align-items-baseline justify-content-between mb-2'
   const formLabelClass = 'me-3 text-nowrap'
@@ -54,10 +54,15 @@ function PetAddForm() {
     try{
       const res = await axios.post(`${serverUrl}/pet`, petFormData, {headers: {authorization: `Bearer ${token}`}});
       if(res){
-        navigate('/dashboard')
+        navigate('/dashboard');
+        setToastMessage({variant: 'Info', messageType: 'Success', message: "Pet added successfully!"});
+        setShowNotificationToast(true); 
       }
     }catch(err){
       console.log(err);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true); 
     }
   }
 

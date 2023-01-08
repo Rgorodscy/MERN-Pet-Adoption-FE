@@ -3,10 +3,11 @@ import {Form, Button} from 'react-bootstrap'
 import axios from 'axios';
 import { useNavigate }  from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import NotificationToast from './NotificationToast';
 
 function Login() {
   const navigate = useNavigate();
-  const {setCurrentUser, serverUrl, setShowLoginModal, setToken} = useAuth();
+  const {setCurrentUser, serverUrl, setShowLoginModal, setToken, setToastMessage, setShowNotificationToast} = useAuth();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -29,10 +30,12 @@ function Login() {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', res.data.userData);
       setShowLoginModal(false);
-      navigate('/mypets')
+      navigate('/mypets');
     }catch(err){
       console.log(err);
-      alert(err.response.data);
+      const errorMessage = typeof err.response.data === "string" ? err.response.data : err.response.statusText;
+      setToastMessage({variant: 'Danger', messageType: 'Error', message: errorMessage});
+      setShowNotificationToast(true);
     }
   }
 
@@ -50,6 +53,7 @@ function Login() {
         </Form.Group>
         <Button className='w-100 mt-2' type='submit' variant='info'>Login</Button>
       </Form>
+
     </div>
   )
 }
