@@ -11,7 +11,10 @@ function Homepage() {
     <div className='d-flex flex-column align-items-center mt-3 text-secondary'>
       <h1>Welcome to the Pet Center of Adoption<br/>
         {currentUser && 
-          ` ${currentUser.firstName} ${currentUser.lastName}`
+          <div>
+            <span className='text-capitalize'>{currentUser.firstName}</span> 
+            <span className='text-capitalize'> {currentUser.lastName}!</span>
+          </div>
           }
       </h1>
       <p className='text-justify w-50 mt-3'>We bring you a great platform to find your next puppy.
@@ -22,12 +25,12 @@ function Homepage() {
       Go on and let's find together a new member to your family.
       </p>
  
-      <PetsCarousel className='carousel' />
+      <PetsCarousel className='carousel'  />
 
       <Modal
       show={showLoginModal}
+      onHide={() => setShowLoginModal(false)}
       className='d-flex'
-      backdrop='static'
       >
         
         {showLoginModal && 

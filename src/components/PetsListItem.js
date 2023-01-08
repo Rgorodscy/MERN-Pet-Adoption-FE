@@ -11,7 +11,8 @@ function PetsListItem({pet}) {
     text-light 
     border-bottom border-secondary rounded 
     d-block text-decoration-none 
-    py-1 my-1'>
+    py-1 my-1
+    text-capitalize'>
       {pet.name} 
     </Link>
   )

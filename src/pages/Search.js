@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Spinner } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext'
 import SearchResultsContainer from '../components/SearchResultsContainer'
-
 
 function Search() {
   const [searchResults, setSearchResults] = useState([])
@@ -36,10 +36,10 @@ function Search() {
     }
   }
 
-
   return (
     <div className='text-secondary mt-3'>
       <h1>Pets Found:</h1>
+      {!searchResults[0] && <Spinner className='mt-5' />}
       <SearchResultsContainer searchResults={searchResults} />
     </div>
   )

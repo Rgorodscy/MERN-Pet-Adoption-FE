@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, Card, Spinner} from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
@@ -8,7 +8,7 @@ import PetCard from '../components/PetCard'
 function UserProfile() {
     const navigate = useNavigate()
     const { id } = useParams();
-    const [userData, setUserData] = useState([]);
+    const [userData, setUserData] = useState({});
     const {serverUrl, currentUser, token} = useAuth();
     const userId = id ? id.slice(1) : currentUser.id;
     const isCurrentUserProfile = id ? false : true;
@@ -44,65 +44,80 @@ function UserProfile() {
       }
 
       const divClassList = 'd-flex';
-      const labelClassList = 'me-2';
+      const labelClassList = 'me-2 text-capitalize';
+
 
     return (
-    
-    <div>
+      
+      <div>
+        {!userData.id && <Spinner className='text-secondary mt-3' />}
+        {userData.id &&
         <div className='d-flex flex-column align-items-center text-secondary mt-3'>
+
+
         {currentUser.isAdmin && !userData.isAdmin &&
-        <Button onClick={handleAdmin} variant='info'>Make Admin</Button>
+          <Button onClick={handleAdmin} variant='info'>Make Admin</Button>
         }
         {!isCurrentUserProfile &&
-        <h1>{userData.firstName} {userData.lastName}'s Profile</h1>
+          <h1>{userData.firstName} {userData.lastName}'s Profile</h1>
         }
         {isCurrentUserProfile &&
-        <div>
           <h1>Your Profile</h1>
-          <Button onClick={() => navigate('/editprofile')} variant='info'>Edit Profile</Button>
-          <div className={divClassList}>
-            <h2 className={labelClassList}>Full Name:</h2>
-            <h3>{userData.firstName} {userData.lastName}</h3>
-          </div>
-        </div>
         }
-        <div className={divClassList}>
-            <h2 className={labelClassList}>Email:</h2>
-            <h3>{userData.email}</h3>
-        </div>
-        <div className={divClassList}>
-            <h2 className={labelClassList}>Phone Number:</h2>
-            <h3>{userData.phone}</h3>
-        </div>
-        <div className={divClassList}>
-            <h2 className={labelClassList}>Bio:</h2>
-            <h3>{userData.bio}</h3>
-        </div>
         <div>
+          <Card className='mb-3'>
+            <Card.Header className='bg-info text-light'>
+              <h2 className='text-capitalize'>{userData.firstName} {userData.lastName}</h2>
+            </Card.Header>
+            <Card.Body>
+              <div className={divClassList}>
+                  <h2 className={labelClassList}>Email:</h2>
+                  <h3>{userData.email}</h3>
+              </div>
+              <div className={divClassList}>
+                  <h2 className={labelClassList}>Phone Number:</h2>
+                  <h3>{userData.phone}</h3>
+              </div>
+              <div className={divClassList}>
+                  <h2 className={labelClassList}>Bio:</h2>
+                  <h3>{userData.bio}</h3>
+              </div>
+            </Card.Body>
+            <Card.Footer className='bg-info text-light'>
+              <Button onClick={() => navigate('/editprofile')} variant='light'>Edit Profile</Button>
+            </Card.Footer>
+          </Card>
+        </div>
+        <div className='d-flex'>
           {userData.myPets &&
-          <div className='d-flex flex-column'>
-          <h2 className={labelClassList}>{userData.firstName}'s pets:</h2>
-              {userData.myPets.map(pet => 
-                  <div className='m-2'>
-                  <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
-                  </div>
-              )}
-          
-          </div>
+            <Card className='me-3 p-2'>
+              <div className='d-flex flex-column'>
+              <h2 className={labelClassList}>{userData.firstName}'s pets:</h2>
+                  {userData.myPets.map(pet => 
+                      <div className='m-2'>
+                      <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
+                      </div>
+                  )}
+              
+              </div>
+            </Card>
           }
           
           {userData.savedPets &&
-          <div className='d-flex flex-column'>
-              <h2 className={labelClassList}>{userData.firstName}'s saved pets:</h2>
-              {userData.savedPets.map(pet => 
-                  <div className='m-2'>
-                  <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
-                  </div>
-              )}             
-          </div>
+            <Card className='ms-3 p-2'>
+              <div className='d-flex flex-column'>
+                  <h2 className={labelClassList}>Saved pets:</h2>
+                  {userData.savedPets.map(pet => 
+                      <div className='m-2'>
+                      <PetCard key={pet.id} pet={pet} className="col-xs-3"/>
+                      </div>
+                  )}             
+              </div>
+            </Card>
           }
         </div>
         </div>
+  }
     </div>
   )
 }

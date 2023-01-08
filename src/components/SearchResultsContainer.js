@@ -1,10 +1,11 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col';
+import {Col} from 'react-bootstrap';
 import PetCard from './PetCard'
 
 function SearchResultsContainer({searchResults}) {
   return (
     <div className='container mt-4'>
+
       <div className='row justify-content-center'>
         {searchResults.map((pet) => 
           <Col 

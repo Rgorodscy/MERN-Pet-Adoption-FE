@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PetsListItem from './PetsListItem'
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
+import { Spinner } from 'react-bootstrap';
 
 function PetsListContainer() {
   const [petsList, setPetsList] = useState([]);
@@ -20,6 +21,7 @@ function PetsListContainer() {
     <div className='w-50 me-1'>
       <h2>Pets</h2>
       <div className=' vh-100 overflow-auto border rounded border-2'>
+        {!petsList[0] && <Spinner />}
         {petsList && petsList.map((pet) => 
         <PetsListItem key={pet.id} pet={pet} />
         )}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {Form, Button} from 'react-bootstrap'
 import { useNavigate }  from 'react-router-dom'
 
-function SearchBar({setSearchClicked}) {
+function SearchBar({setSearchClicked, setShowOffCanvas}) {
   const [advancedSearch, setAdvancedSearch] = useState(false);
   const [searchObject, setSearchObject] = useState({});
   const navigate = useNavigate();
@@ -15,7 +15,8 @@ function SearchBar({setSearchClicked}) {
     e.preventDefault();
     const queryParams = new URLSearchParams(searchObject);
     navigate(`/search?${queryParams.toString()}`);
-    setSearchClicked(false)
+    setSearchClicked(false);
+    setShowOffCanvas(false);
   }
 
   const formGroupClassList = 'd-flex align-items-baseline my-2'
