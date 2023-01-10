@@ -6,7 +6,7 @@ import { useNavigate }  from 'react-router-dom'
 
 function ProfileForm() {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser, serverUrl , token} = useAuth();
+  const {currentUser, setCurrentUser, serverUrl , token, setShowNotificationToast, setToastMessage} = useAuth();
   const [newUserInfo, setNewUserInfo] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
@@ -26,9 +26,11 @@ function ProfileForm() {
     e.preventDefault();
     const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
     if(updatedUser){
-      setCurrentUser({...currentUser, ...newUserInfo})
+      setCurrentUser({...currentUser, ...newUserInfo});
+      setToastMessage({variant: 'Info', messageType: 'Success', message: "Profile updated successfully!"});
+      setShowNotificationToast(true); 
     }
-    navigate("/")
+    navigate("/myprofile")
   }
 
   return (

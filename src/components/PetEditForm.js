@@ -135,7 +135,7 @@ function PetEditForm() {
         <Form.Label className={formLabelClass}>Breed</Form.Label>
         <Form.Control className={formInputClass} type='text' onChange={handleChange} name="breed" defaultValue={petData.breed} required={true}></Form.Control>
       </Form.Group>
-      <Button className='mb-2 w-100' disabled={!newPet.type} type='submit'>Edit Pet</Button>
+      <Button className='mb-2 w-100' disabled={!newPet.type} type='submit' variant='info'>Edit Pet</Button>
     </Form>
     </div>
   )

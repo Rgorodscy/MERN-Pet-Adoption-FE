@@ -127,7 +127,7 @@ function PetAddForm() {
         <Form.Label className={formLabelClass}>Breed</Form.Label>
         <Form.Control className={formInputClass} type='text' onChange={handleChange} name="breed" required={true}></Form.Control>
       </Form.Group>
-      <Button className='mb-2 w-100' type='submit'>Add Pet</Button>
+      <Button className='mb-2 w-100' type='submit' variant='info'>Add Pet</Button>
     </Form>
     </div>
   )

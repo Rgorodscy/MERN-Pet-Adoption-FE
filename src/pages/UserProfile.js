@@ -89,9 +89,10 @@ function UserProfile() {
                   <h3>{userData.bio}</h3>
               </div>
             </Card.Body>
-            <Card.Footer className='bg-info text-light'>
-              <Button onClick={() => navigate('/editprofile')} variant='light'>Edit Profile</Button>
-            </Card.Footer>
+            {userData.id === currentUser.id &&
+              <Card.Footer className='bg-info text-light'>
+                <Button onClick={() => navigate('/editprofile')} variant='light'>Edit Profile</Button>
+              </Card.Footer>}
           </Card>
         </div>
         <div className='d-flex'>
