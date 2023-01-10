@@ -22,7 +22,7 @@ function PetEditForm() {
   const initialFetch = async () => {
     const petId = id.slice(1);
     try{
-      const petFound = await axios.get(`${serverUrl}/pet/${petId}`, {headers: {authorization: `Bearer ${token}`}});
+      const petFound = await axios.get(`${serverUrl}/pet/${petId}`, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
       setPetData(petFound.data[0]);
     }catch(err){
       console.log(err);
@@ -60,7 +60,7 @@ function PetEditForm() {
 
   const putPet = async (petFormData) => {
     try{
-      const res = await axios.put(`${serverUrl}/pet/${petData.id}`, petFormData, {headers: {authorization: `Bearer ${token}`}});
+      const res = await axios.put(`${serverUrl}/pet/${petData.id}`, petFormData, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
       if(res){
         navigate('/dashboard');
         setToastMessage({variant: 'Info', messageType: 'Success', message: "Pet updated successfully!"});

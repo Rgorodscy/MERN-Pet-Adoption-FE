@@ -24,7 +24,7 @@ function ProfileForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
+    const updatedUser = await axios.put(`${serverUrl}/user/${currentUser.id}`, newUserInfo, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
     if(updatedUser){
       setCurrentUser({...currentUser, ...newUserInfo});
       setToastMessage({variant: 'Info', messageType: 'Success', message: "Profile updated successfully!"});

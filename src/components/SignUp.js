@@ -28,7 +28,7 @@ function Signup({setSignup}) {
 
   const postUser = async (newUser) => {
     try{
-      const res = await axios.post(`${serverUrl}/signup/`, newUser);
+      const res = await axios.post(`${serverUrl}/signup/`, newUser, {headers: {withCredentials: true}});
       if(res){
         navigate('/');
         setSignup(false);

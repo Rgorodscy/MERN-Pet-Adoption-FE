@@ -52,7 +52,7 @@ function PetAddForm() {
 
   const postPet = async (petFormData) => {
     try{
-      const res = await axios.post(`${serverUrl}/pet`, petFormData, {headers: {authorization: `Bearer ${token}`}});
+      const res = await axios.post(`${serverUrl}/pet`, petFormData, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
       if(res){
         navigate('/dashboard');
         setToastMessage({variant: 'Info', messageType: 'Success', message: "Pet added successfully!"});

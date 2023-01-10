@@ -14,7 +14,7 @@ function UsersListContainer() {
 
   const fetchAllUsers = async () => {
     try{
-      const allUsers = await axios.get(`${serverUrl}/user`, {headers: {authorization: `Bearer ${token}`}});
+      const allUsers = await axios.get(`${serverUrl}/user`, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
       setUsersList(allUsers.data)
     }catch(err){
       console.log(err);
