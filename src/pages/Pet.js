@@ -22,7 +22,7 @@ function Pet() {
 
   const initialFetch = async () => {
     try{
-      const petFound = await axios.get(`${serverUrl}/pet/${petId}`);
+      const petFound = await axios.get(`${serverUrl}/pet/${petId}`, { headers: {withCredentials: true}});
       setPetData(petFound.data[0]);
     }catch(err){
       console.log(err);
@@ -49,7 +49,7 @@ function Pet() {
     }
     if(!petIsSaved){
       try{
-        const saveRes = await axios.post(`${serverUrl}/pet/${petId}/save`, reqBody, {headers: {authorization: `Bearer ${token}`}});
+        const saveRes = await axios.post(`${serverUrl}/pet/${petId}/save`, reqBody, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
         setCurrentUser({...currentUser, savedPets: [...currentUser.savedPets,  saveRes.data]})
       }catch(err){
         console.log(err);
@@ -60,7 +60,7 @@ function Pet() {
     }
     if(petIsSaved){
       try{
-        const saveRes = await axios.delete(`${serverUrl}/pet/${petId}/save`, {data: reqBody, headers: {authorization: `Bearer ${token}`}});
+        const saveRes = await axios.delete(`${serverUrl}/pet/${petId}/save`, {data: reqBody, headers: {authorization: `Bearer ${token}`, withCredentials: true}});
         if(saveRes){
           const newSavedPetsArray = currentUser.savedPets.filter((pet) => pet.id !== petId);
           setCurrentUser({...currentUser, savedPets: newSavedPetsArray});
@@ -80,7 +80,7 @@ function Pet() {
       type: changeType
     }
     try{
-      const adoptFosterRes = await axios.post(`${serverUrl}/pet/${petId}/adopt`, reqBody, {headers: {authorization: `Bearer ${token}`}});
+      const adoptFosterRes = await axios.post(`${serverUrl}/pet/${petId}/adopt`, reqBody, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
       setCurrentUser({...currentUser, myPets: [...currentUser.myPets,  adoptFosterRes.data]});
       setPetData(adoptFosterRes.data);
     }catch(err){
@@ -96,7 +96,7 @@ function Pet() {
       userId: currentUser.id
     }
     try{
-      const returnRes = await axios.post(`${serverUrl}/pet/${petId}/return`, reqBody, {headers: {authorization: `Bearer ${token}`}});
+      const returnRes = await axios.post(`${serverUrl}/pet/${petId}/return`, reqBody, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
       const newMyPetsArray = currentUser.myPets.filter((pet) => pet.id !== petId);
       setCurrentUser({...currentUser, myPets: newMyPetsArray});
       setPetData(returnRes.data);

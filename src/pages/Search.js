@@ -29,7 +29,7 @@ function Search() {
 
   const handleSearch = async () => {
     try{
-      const searchResponse = await axios.get(`${serverUrl}/pet/`, {params: searchObject});
+      const searchResponse = await axios.get(`${serverUrl}/pet/`, {params: searchObject, headers: {withCredentials: true}});
       setSearchResults(searchResponse.data)
     }catch(err){
       console.log(err);

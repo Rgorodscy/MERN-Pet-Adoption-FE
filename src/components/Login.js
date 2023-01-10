@@ -23,7 +23,7 @@ function Login() {
 
   const postUser = async (user) => {
     try{
-      const res = await axios.post(`${serverUrl}/login/`, user);
+      const res = await axios.post(`${serverUrl}/login/`, user, {headers: {withCredentials: true}});
       setCurrentUser(JSON.parse(res.data.userData));
       setToken(res.data.token);
       localStorage.setItem('token', res.data.token);

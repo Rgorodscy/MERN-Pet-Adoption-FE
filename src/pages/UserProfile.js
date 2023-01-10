@@ -19,7 +19,7 @@ function UserProfile() {
     
       const initialFetch = async () => {
         try{
-          const userFound = await axios.get(`${serverUrl}/user/${userId}`);
+          const userFound = await axios.get(`${serverUrl}/user/${userId}`, {headers: {withCredentials: true}});
           setUserData(userFound.data);
         }catch(err){
           console.log(err);
@@ -35,7 +35,7 @@ function UserProfile() {
           ...userData,
           isAdmin: true
         }
-        const updatedUser = await axios.put(`${serverUrl}/user/${userId}`, newUserInfo, {headers: {authorization: `Bearer ${token}`}});
+        const updatedUser = await axios.put(`${serverUrl}/user/${userId}`, newUserInfo, {headers: {authorization: `Bearer ${token}`, withCredentials: true}});
         if(updatedUser){
           setUserData({...userData, isAdmin: true});
           setToastMessage({variant: 'Info', messageType: 'Success', message: "User is now an admin."});

@@ -14,7 +14,7 @@ function PetsListContainer() {
   
   const fetchAllPets = async () => {
     try{
-      const allPets = await axios.get(`${serverUrl}/pet`);
+      const allPets = await axios.get(`${serverUrl}/pet`, {withCredentials: true});
       setPetsList(allPets.data)
     }catch(err){
       console.log(err);
