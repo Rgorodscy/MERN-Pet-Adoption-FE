@@ -16,7 +16,7 @@ function PetCard({pet}) {
   
   
   return (
-    <Card>
+    <Card className='shadow-sm'>
       <Card.Header className='bg-info text-light'>
         <h3 className='text-center text-capitalize'>{pet.name}</h3>
       </Card.Header>

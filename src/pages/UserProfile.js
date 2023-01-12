@@ -71,7 +71,7 @@ function UserProfile() {
           <h1>Your Profile</h1>
         }
         <div>
-          <Card className='mb-3'>
+          <Card className='mb-3 shadow-sm'>
             <Card.Header className='bg-info text-light'>
               <h2 className='text-capitalize'>{userData.firstName} {userData.lastName}</h2>
             </Card.Header>
