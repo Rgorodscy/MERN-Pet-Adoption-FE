@@ -30,7 +30,7 @@ function Navbar() {
   
 
   return (
-    <Nav className='d-flex flex-column px-5 py-2 bg-info'>
+    <Nav className='d-flex flex-column px-5 py-2 bg-info sticky-top shadow'>
       <div className='d-flex flex-row justify-content-between'>
         {currentUser && <Button className='me-1 p-2 justify-self-center' variant='light' onClick={() => setShowOffCanvas(true)}>Pages</Button>}
         {!currentUser && <Button className='me-1 p-2 justify-self-center' variant='light' onClick={() => setSearchClicked(!searchClicked)}>Search</Button>}

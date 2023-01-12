@@ -27,7 +27,7 @@ function PetsListContainer() {
   return (
     <div className='w-50 me-1'>
       <h2>Pets</h2>
-      <div className=' vh-100 overflow-auto border rounded border-2'>
+      <div className=' vh-100 overflow-auto border rounded border-2 shadow-sm'>
         {!petsList[0] && <Spinner />}
         {petsList && petsList.map((pet) => 
         <PetsListItem key={pet.id} pet={pet} />
