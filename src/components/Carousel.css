@@ -1,23 +1,23 @@
 .image {
-    height: 55vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-.carousel {
-    width: 600px;
-    height: 400px;
-    border-radius: 10px;
-  }
-  
-@media only screen and (max-width: 600px) {
-    .image {
-        height: 40vh;
-      }
+  height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .carousel {
-        width: 85vw;
-        margin-bottom: 1rem;
-      }
-} 
+.carousel {
+  width: 600px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .image {
+    height: 40vh;
+  }
+
+  .carousel {
+    width: 85vw;
+    margin-bottom: 1rem;
+  }
+}

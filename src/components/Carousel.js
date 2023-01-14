@@ -1,12 +1,12 @@
-import React from 'react';
-import {Carousel, Image} from 'react-bootstrap';
-import './Carousel.css'
+import React from "react";
+import { Carousel, Image } from "react-bootstrap";
+import "./Carousel.css";
 
 function PetsCarousel() {
-  const imageClasslist = "d-block w-100 rounded image"
-  
-    return (
-    <Carousel className='h-25 carousel'>
+  const imageClasslist = "d-block w-100 rounded image";
+
+  return (
+    <Carousel className="h-25 carousel">
       <Carousel.Item>
         <Image
           className={imageClasslist}

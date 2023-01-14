@@ -1,18 +1,23 @@
-import React from 'react';
-import {Button, Offcanvas} from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import React from "react";
+import { Button, Offcanvas } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
-function PagesOffCanvas({showOffCanvas, setShowOffCanvas, searchClicked, setSearchClicked}) {
-  const {adminUser} = useAuth();
+function PagesOffCanvas({
+  showOffCanvas,
+  setShowOffCanvas,
+  searchClicked,
+  setSearchClicked,
+}) {
+  const { adminUser } = useAuth();
   const navigate = useNavigate();
 
   const handleClose = () => setShowOffCanvas(false);
 
   const pageNavigate = (route) => {
     navigate(route);
-    handleClose()
-  }
+    handleClose();
+  };
 
   return (
     <>
@@ -21,16 +26,42 @@ function PagesOffCanvas({showOffCanvas, setShowOffCanvas, searchClicked, setSear
           <Offcanvas.Title>Pages</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className='d-flex flex-column'>
-            <Button className='btn-info mb-2' variant='info' onClick={() => setSearchClicked(!searchClicked)}>Search</Button>
-            <Button className='btn-info mb-2' onClick={() => pageNavigate('/mypets')}>My Pets</Button>
-            <Button className='btn-info mb-2' onClick={() => pageNavigate('/myprofile')}>Profile</Button>
-            {adminUser === true &&
-              <Button className='btn-info mb-2' onClick={() => pageNavigate('/dashboard')}>Dashboard</Button>
-            }
-            {adminUser === true &&
-              <Button className='btn-info mb-2' onClick={() => pageNavigate('/petadd')}>Add a Pet</Button>
-            }
+          <div className="d-flex flex-column">
+            <Button
+              className="btn-info mb-2"
+              variant="info"
+              onClick={() => setSearchClicked(!searchClicked)}
+            >
+              Search
+            </Button>
+            <Button
+              className="btn-info mb-2"
+              onClick={() => pageNavigate("/mypets")}
+            >
+              My Pets
+            </Button>
+            <Button
+              className="btn-info mb-2"
+              onClick={() => pageNavigate("/myprofile")}
+            >
+              Profile
+            </Button>
+            {adminUser === true && (
+              <Button
+                className="btn-info mb-2"
+                onClick={() => pageNavigate("/dashboard")}
+              >
+                Dashboard
+              </Button>
+            )}
+            {adminUser === true && (
+              <Button
+                className="btn-info mb-2"
+                onClick={() => pageNavigate("/petadd")}
+              >
+                Add a Pet
+              </Button>
+            )}
           </div>
         </Offcanvas.Body>
       </Offcanvas>
