@@ -29,7 +29,7 @@ function Search() {
 
   useEffect(() => {
     handleSearch();
-  }, [searchObject]);
+  }, [search]);
 
   const handleSearch = async () => {
     try {

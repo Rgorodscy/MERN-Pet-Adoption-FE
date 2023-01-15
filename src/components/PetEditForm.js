@@ -29,7 +29,7 @@ function PetEditForm() {
       const petFound = await axios.get(`${serverUrl}/pet/${petId}`, {
         headers: { authorization: `Bearer ${token}`, withCredentials: true },
       });
-      setPetData(petFound.data[0]);
+      setPetData(petFound.data);
     } catch (err) {
       console.log(err);
       const errorMessage =
