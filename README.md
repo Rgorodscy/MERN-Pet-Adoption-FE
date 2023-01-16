@@ -11,3 +11,5 @@ The admin users are able to include new pets, change others' status to admin, ed
 [React](https://reactjs.org/) - JavaScript library for building user interfaces.
 
 # [Deployed Link](https://pet-adoption-fe.vercel.app/)
+
+Admin User: fred@mail.com password: 123
