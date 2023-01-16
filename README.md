@@ -12,4 +12,4 @@ The admin users are able to include new pets, change others' status to admin, ed
 
 # [Deployed Link](https://pet-adoption-fe.vercel.app/)
 
-Admin User: fred@mail.com password: 123
+Admin User: fred@mail.com; password: 123
