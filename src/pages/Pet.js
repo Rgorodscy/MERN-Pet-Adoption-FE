@@ -180,6 +180,11 @@ function Pet() {
     }
   };
 
+  const onImageError = (e) => {
+    e.target.src =
+      "https://res.cloudinary.com/dyur3xjlc/image/upload/v1674034722/pet_image_placeholder_id1nvf.jpg";
+  };
+
   return (
     <div>
       {!petData.id && <Spinner className="mt-3 text-secondary" />}
@@ -191,6 +196,7 @@ function Pet() {
               height="240px"
               width="240px"
               className="rounded"
+              onError={onImageError}
             />
             <h1>{petData.name}</h1>
             <div className="w-50">

@@ -45,8 +45,6 @@ function PetEditForm() {
     }
   };
 
-  console.log(newPet);
-
   const handleChange = (e) => {
     setNewPet({ ...petData, [e.target.name]: e.target.value });
   };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Nav, Modal, CloseButton } from "react-bootstrap";
+import { Button, Nav, Modal, CloseButton, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import PagesOffCanvas from "./PagesOffCanvas";
@@ -54,13 +54,19 @@ function Navbar() {
             Search
           </Button>
         )}
-        <h3
+        <div
+          className="d-flex flex-row"
           onClick={() => navigate("/")}
-          className="text-light me-3"
           role="button"
         >
-          Pet Center
-        </h3>
+          <Image
+            src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1674034722/pet_image_placeholder_id1nvf.jpg"
+            height="40px"
+            rounded
+            className="me-3"
+          />
+          <h3 className="text-light me-3">Pet Center</h3>
+        </div>
         <Button
           className=" p-2"
           onClick={handleLoginLogout}

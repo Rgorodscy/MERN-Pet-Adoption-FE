@@ -14,6 +14,11 @@ function PetCard({ pet }) {
     adoptionStatusAlertColor = "secondary";
   }
 
+  const onImageError = (e) => {
+    e.target.src =
+      "https://res.cloudinary.com/dyur3xjlc/image/upload/v1674034722/pet_image_placeholder_id1nvf.jpg";
+  };
+
   return (
     <Card className="shadow-sm">
       <Card.Header className="bg-info text-light">
@@ -26,6 +31,7 @@ function PetCard({ pet }) {
           width="120px"
           rounded={true}
           className="border border-secondary"
+          onError={onImageError}
         />
         <Alert className="mt-3" variant={adoptionStatusAlertColor}>
           {pet.adoptionStatus}
