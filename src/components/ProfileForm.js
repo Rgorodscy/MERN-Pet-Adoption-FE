@@ -31,23 +31,36 @@ function ProfileForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedUser = await axios.put(
-      `${serverUrl}/user/${currentUser.id}`,
-      newUserInfo,
-      { headers: { authorization: `Bearer ${token}`, withCredentials: true } }
-    );
-    if (updatedUser) {
-      setCurrentUser({ ...currentUser, ...newUserInfo });
+    try {
+      const updatedUser = await axios.put(
+        `${serverUrl}/user/${currentUser.id}`,
+        newUserInfo,
+        { headers: { authorization: `Bearer ${token}`, withCredentials: true } }
+      );
+      if (updatedUser) {
+        setCurrentUser({ ...currentUser, ...newUserInfo });
+        setToastMessage({
+          variant: "Info",
+          messageType: "Success",
+          message: "Profile updated successfully!",
+        });
+        setShowNotificationToast(true);
+      }
+      navigate("/myprofile");
+    } catch (err) {
+      console.log(err);
+      const errorMessage =
+        typeof err.response.data === "string"
+          ? err.response.data
+          : err.response.statusText;
       setToastMessage({
-        variant: "Info",
-        messageType: "Success",
-        message: "Profile updated successfully!",
+        variant: "Danger",
+        messageType: "Error",
+        message: errorMessage,
       });
       setShowNotificationToast(true);
     }
-    navigate("/myprofile");
   };
-
   const formGroupClassList = "mt-3";
 
   return (
