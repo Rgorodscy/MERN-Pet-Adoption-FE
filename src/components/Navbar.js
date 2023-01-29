@@ -7,13 +7,8 @@ import SearchBar from "./SearchBar";
 
 function Navbar() {
   const navigate = useNavigate();
-  const {
-    setShowLoginModal,
-    currentUser,
-    setCurrentUser,
-    setToken,
-    adminUser,
-  } = useAuth();
+  const { setShowLoginModal, currentUser, setCurrentUser, setToken } =
+    useAuth();
   const [searchClicked, setSearchClicked] = useState(false);
   const [showOffCanvas, setShowOffCanvas] = useState(false);
 
@@ -77,7 +72,11 @@ function Navbar() {
         </Button>
       </div>
 
-      <Modal show={searchClicked} onHide={() => setSearchClicked(false)}>
+      <Modal
+        show={searchClicked}
+        onHide={() => setSearchClicked(false)}
+        dialogClassName
+      >
         <div className="d-flex flex-column align-items-center text-secondary m-1 p-2 border border-secondary rounded">
           <CloseButton
             onClick={() => setSearchClicked(!searchClicked)}
