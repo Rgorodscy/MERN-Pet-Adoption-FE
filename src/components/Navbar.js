@@ -50,7 +50,7 @@ function Navbar() {
           </Button>
         )}
         <div
-          className="d-flex flex-row"
+          className="d-flex flex-row align-items-center"
           onClick={() => navigate("/")}
           role="button"
         >
