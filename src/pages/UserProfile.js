@@ -121,7 +121,7 @@ function UserProfile() {
                 </div>
               </Card.Body>
               {userData.id === currentUser.id && (
-                <Card.Footer className="bg-info text-light">
+                <Card.Footer>
                   <Button
                     onClick={() => navigate("/editprofile")}
                     style={buttonStyle}
