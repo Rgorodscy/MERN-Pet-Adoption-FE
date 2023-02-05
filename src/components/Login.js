@@ -3,6 +3,7 @@ import { Form, Button, FloatingLabel } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { buttonStyle, inputStyle } from "./libs";
 
 function Login() {
   const navigate = useNavigate();
@@ -65,7 +66,12 @@ function Login() {
   return (
     <div className="d-flex flex-column align-items-center p-3">
       <h1>Login</h1>
-      <Form onSubmit={handleLogin} noValidate validated={validated}>
+      <Form
+        onSubmit={handleLogin}
+        noValidate
+        validated={validated}
+        style={{ backgroundColor: "#00D9C2", color: "#00278A" }}
+      >
         <Form.Group className="mt-3">
           <FloatingLabel label="Email">
             <Form.Control
@@ -74,6 +80,7 @@ function Login() {
               name="email"
               placeholder="Email"
               required
+              style={inputStyle}
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please insert your email
@@ -88,13 +95,14 @@ function Login() {
               name="password"
               placeholder="Password"
               required
+              style={inputStyle}
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please insert your password
             </Form.Control.Feedback>
           </FloatingLabel>
         </Form.Group>
-        <Button className="w-100 mt-3" type="submit" variant="info">
+        <Button className="w-100 mt-3" type="submit" style={buttonStyle}>
           Login
         </Button>
       </Form>

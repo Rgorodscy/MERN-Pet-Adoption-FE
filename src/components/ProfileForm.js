@@ -64,7 +64,7 @@ function ProfileForm() {
   const formGroupClassList = "mt-3";
 
   return (
-    <div className="d-flex flex-column align-items-center text-secondary mt-3">
+    <div className="d-flex flex-column align-items-center mt-3">
       <h1>Update Your Profile</h1>
       <Form className="w-50" onSubmit={handleSubmit}>
         <Form.Group className={formGroupClassList}>

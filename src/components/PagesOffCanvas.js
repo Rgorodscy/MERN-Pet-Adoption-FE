@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { modalBgColor, buttonStyle } from "./libs";
 
 function PagesOffCanvas({
   showOffCanvas,
@@ -22,27 +23,30 @@ function PagesOffCanvas({
   return (
     <>
       <Offcanvas show={showOffCanvas} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header style={modalBgColor}>
           <Offcanvas.Title>Pages</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body style={modalBgColor}>
           <div className="d-flex flex-column">
             <Button
               className="btn-info mb-2"
               variant="info"
               onClick={() => setSearchClicked(!searchClicked)}
+              style={buttonStyle}
             >
               Search
             </Button>
             <Button
               className="btn-info mb-2"
               onClick={() => pageNavigate("/mypets")}
+              style={buttonStyle}
             >
               My Pets
             </Button>
             <Button
               className="btn-info mb-2"
               onClick={() => pageNavigate("/myprofile")}
+              style={buttonStyle}
             >
               Profile
             </Button>
@@ -50,6 +54,7 @@ function PagesOffCanvas({
               <Button
                 className="btn-info mb-2"
                 onClick={() => pageNavigate("/dashboard")}
+                style={buttonStyle}
               >
                 Dashboard
               </Button>
@@ -58,6 +63,7 @@ function PagesOffCanvas({
               <Button
                 className="btn-info mb-2"
                 onClick={() => pageNavigate("/petadd")}
+                style={buttonStyle}
               >
                 Add a Pet
               </Button>

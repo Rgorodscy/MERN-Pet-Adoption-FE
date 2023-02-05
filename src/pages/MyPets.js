@@ -18,7 +18,7 @@ function MyPets() {
   }, [savedPets]);
 
   return (
-    <div className="d-flex flex-column align-items-center text-secondary">
+    <div className="d-flex flex-column align-items-center">
       <div className="my-3">
         <h1>My Pets</h1>
         <Form.Check

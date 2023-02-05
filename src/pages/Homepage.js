@@ -8,7 +8,7 @@ function Homepage() {
   const { showLoginModal, setShowLoginModal, currentUser } = useAuth();
 
   return (
-    <div className="d-flex flex-column align-items-center mt-3 text-secondary">
+    <div className="d-flex flex-column align-items-center mt-3">
       <h1>
         Welcome to the Pet Center of Adoption
         <br />
@@ -35,7 +35,7 @@ function Homepage() {
         className="d-flex"
       >
         {showLoginModal && (
-          <div className="m-2 p-1 border border-secondary rounded">
+          <div className="p-3 rounded" style={{ backgroundColor: "#00D9C2" }}>
             <div className="d-flex justify-content-end">
               <CloseButton onClick={() => setShowLoginModal(false)} />
             </div>

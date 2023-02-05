@@ -3,6 +3,7 @@ import { Form, Button, FloatingLabel } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { buttonStyle, inputStyle } from "./libs";
 
 function PetEditForm() {
   const { serverUrl, token, setShowNotificationToast, setToastMessage } =
@@ -12,7 +13,7 @@ function PetEditForm() {
   const formGroupClass =
     "d-flex align-items-baseline justify-content-between mb-2";
   const formLabelClass = "me-3 text-nowrap";
-  const formInputClass = "w-100";
+  const formInputClass = "w-100 bg-transparent";
   const floatLabelClassList = "w-100";
   const [validated, setValidated] = useState(false);
   const [image, setImage] = useState();
@@ -119,6 +120,7 @@ function PetEditForm() {
             <FloatingLabel className={floatLabelClassList} label="Type">
               <Form.Select
                 className={formInputClass}
+                style={inputStyle}
                 defaultValue={petData.type}
                 onChange={handleChange}
                 name="type"
@@ -137,6 +139,7 @@ function PetEditForm() {
             >
               <Form.Select
                 className={formInputClass}
+                style={inputStyle}
                 onChange={handleChange}
                 name="adoptionStatus"
                 defaultValue={petData.adoptionStatus}
@@ -154,6 +157,7 @@ function PetEditForm() {
           <FloatingLabel className={floatLabelClassList} label="Name">
             <Form.Control
               className={formInputClass}
+              style={inputStyle}
               type="text"
               onChange={handleChange}
               name="name"
@@ -167,6 +171,7 @@ function PetEditForm() {
           <Form.Label className={formLabelClass}>Image</Form.Label>
           <Form.Control
             className={formInputClass}
+            style={inputStyle}
             type="file"
             onChange={(e) => setImage(e.target.files[0])}
             name="image"
@@ -179,6 +184,7 @@ function PetEditForm() {
             <FloatingLabel className={floatLabelClassList} label="Height">
               <Form.Control
                 className={formInputClass}
+                style={inputStyle}
                 type="number"
                 onChange={handleChange}
                 name="height"
@@ -192,6 +198,7 @@ function PetEditForm() {
             <FloatingLabel className={floatLabelClassList} label="Weight">
               <Form.Control
                 className={formInputClass}
+                style={inputStyle}
                 type="number"
                 onChange={handleChange}
                 name="weight"
@@ -205,6 +212,7 @@ function PetEditForm() {
             <FloatingLabel className={floatLabelClassList} label="Color">
               <Form.Control
                 className={formInputClass}
+                style={inputStyle}
                 type="text"
                 onChange={handleChange}
                 name="color"
@@ -219,6 +227,7 @@ function PetEditForm() {
           <FloatingLabel className={floatLabelClassList} label="Bio">
             <Form.Control
               className={formInputClass}
+              style={inputStyle}
               as="textarea"
               onChange={handleChange}
               name="bio"
@@ -232,6 +241,7 @@ function PetEditForm() {
           <FloatingLabel className={floatLabelClassList} label="Hypoallergenic">
             <Form.Select
               className={formInputClass}
+              style={inputStyle}
               onChange={handleChange}
               name="hypoallergenic"
               defaultValue={petData.hypoallergenic}
@@ -250,6 +260,7 @@ function PetEditForm() {
           >
             <Form.Control
               className={formInputClass}
+              style={inputStyle}
               type="text"
               onChange={handleChange}
               name="dietary"
@@ -263,6 +274,7 @@ function PetEditForm() {
           <FloatingLabel className={floatLabelClassList} label="Breed">
             <Form.Control
               className={formInputClass}
+              style={inputStyle}
               type="text"
               onChange={handleChange}
               name="breed"
@@ -276,7 +288,7 @@ function PetEditForm() {
           className="mb-2 w-100"
           disabled={!newPet.type}
           type="submit"
-          variant="info"
+          style={buttonStyle}
         >
           Edit Pet
         </Button>

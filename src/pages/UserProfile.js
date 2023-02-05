@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import PetCard from "../components/PetCard";
+import { buttonStyle, cardBgColor } from "../components/libs";
 
 function UserProfile() {
   const navigate = useNavigate();
@@ -84,11 +85,11 @@ function UserProfile() {
 
   return (
     <div>
-      {!userData.id && <Spinner className="text-secondary mt-3" />}
+      {!userData.id && <Spinner className="condary mt-3" />}
       {userData.id && (
-        <div className="d-flex flex-column align-items-center text-secondary mt-3">
+        <div className="d-flex flex-column align-items-center mt-3">
           {currentUser.isAdmin && !userData.isAdmin && (
-            <Button onClick={handleAdmin} variant="info">
+            <Button onClick={handleAdmin} style={buttonStyle}>
               Make Admin
             </Button>
           )}
@@ -99,8 +100,8 @@ function UserProfile() {
           )}
           {isCurrentUserProfile && <h1>Your Profile</h1>}
           <div>
-            <Card className="mb-3 shadow-sm">
-              <Card.Header className="bg-info text-light">
+            <Card className="mb-3 shadow-sm" style={cardBgColor}>
+              <Card.Header style={buttonStyle}>
                 <h2 className="text-capitalize">
                   {userData.firstName} {userData.lastName}
                 </h2>
@@ -123,7 +124,7 @@ function UserProfile() {
                 <Card.Footer className="bg-info text-light">
                   <Button
                     onClick={() => navigate("/editprofile")}
-                    variant="light"
+                    style={buttonStyle}
                   >
                     Edit Profile
                   </Button>
@@ -133,7 +134,7 @@ function UserProfile() {
           </div>
           <div className="d-flex">
             {userData.myPets && (
-              <Card className="me-3 p-2">
+              <Card className="me-3 p-2" style={cardBgColor}>
                 <div className="d-flex flex-column">
                   <h2 className={labelClassList}>
                     {userData.firstName}'s pets:
@@ -148,7 +149,7 @@ function UserProfile() {
             )}
 
             {userData.savedPets && (
-              <Card className="ms-3 p-2">
+              <Card className="ms-3 p-2" style={cardBgColor}>
                 <div className="d-flex flex-column">
                   <h2 className={labelClassList}>Saved pets:</h2>
                   {userData.savedPets.map((pet) => (

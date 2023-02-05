@@ -4,6 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import { useAuth } from "../contexts/AuthContext";
+import {
+  buttonStyle,
+  fosterButtonStyle,
+  inputStyle,
+  returnButtonStyle,
+} from "../components/libs";
 
 function Pet() {
   const {
@@ -187,10 +193,10 @@ function Pet() {
 
   return (
     <div>
-      {!petData.id && <Spinner className="mt-3 text-secondary" />}
+      {!petData.id && <Spinner className="mt-3" />}
       {petData.id && (
-        <Card className="text-secondary">
-          <Card.Body className="d-flex flex-column align-items-center  mt-3">
+        <Card className="bg-transparent">
+          <Card.Body className="d-flex flex-column align-items-center mt-3">
             <Image
               src={petData.image}
               height="240px"
@@ -200,7 +206,7 @@ function Pet() {
             />
             <h1>{petData.name}</h1>
             <div className="w-50">
-              <p className="border border-secondary rounded">
+              <p className=" rounded" style={inputStyle}>
                 Details: <br />
                 Height: {petData.height} <br />
                 Weight: {petData.weight} <br />
@@ -218,27 +224,37 @@ function Pet() {
               {(petData.adoptionStatus === "Available" && (
                 <Button
                   onClick={() => handleAdoptFoster("Adopt")}
-                  variant="info"
+                  style={buttonStyle}
                 >
                   Adopt
                 </Button>
               )) ||
                 (petIsMyPet && petData.adoptionStatus === "Fostered" && (
-                  <Button onClick={() => handleAdoptFoster("Adopt")}>
+                  <Button
+                    onClick={() => handleAdoptFoster("Adopt")}
+                    style={buttonStyle}
+                  >
                     Adopt
                   </Button>
                 ))}
               {petData.adoptionStatus === "Available" && (
-                <Button onClick={() => handleAdoptFoster("Foster")}>
+                <Button
+                  onClick={() => handleAdoptFoster("Foster")}
+                  style={fosterButtonStyle}
+                >
                   Foster
                 </Button>
               )}
               {petIsMyPet && (
-                <Button onClick={handleReturn} variant="secondary">
+                <Button onClick={handleReturn} style={returnButtonStyle}>
                   Return
                 </Button>
               )}
-              <Link onClick={handleSave} className="h4">
+              <Link
+                onClick={handleSave}
+                className="h4"
+                style={{ color: "#00278A" }}
+              >
                 {petIsSaved && <BsBookmarkHeartFill />}
                 {!petIsSaved && <BsBookmarkHeart />}
               </Link>

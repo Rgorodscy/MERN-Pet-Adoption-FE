@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import PagesOffCanvas from "./PagesOffCanvas";
 import SearchBar from "./SearchBar";
+import { modalBgColor } from "./libs";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Navbar() {
         {currentUser && (
           <Button
             className="me-1 p-2 justify-self-center"
-            variant="light"
+            variant="info"
             onClick={() => setShowOffCanvas(true)}
           >
             Pages
@@ -43,7 +44,7 @@ function Navbar() {
         {!currentUser && (
           <Button
             className="me-1 p-2 justify-self-center"
-            variant="light"
+            variant="info"
             onClick={() => setSearchClicked(!searchClicked)}
           >
             Search
@@ -55,17 +56,17 @@ function Navbar() {
           role="button"
         >
           <Image
-            src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1674034722/pet_image_placeholder_id1nvf.jpg"
+            src="https://res.cloudinary.com/dyur3xjlc/image/upload/v1675608162/pet_image-removebg-preview_gq9f0q.png"
             height="40px"
             rounded
             className="me-3"
           />
-          <h3 className="text-light me-3">Pet Center</h3>
+          <h3 className="me-3">Pet Center</h3>
         </div>
         <Button
-          className=" p-2"
+          className="font-weight-bold p-2"
           onClick={handleLoginLogout}
-          variant="light"
+          variant="info"
           type="submit"
         >
           {currentUser ? "Logout" : "Login"}
@@ -77,7 +78,10 @@ function Navbar() {
         onHide={() => setSearchClicked(false)}
         dialogClassName
       >
-        <div className="d-flex flex-column align-items-center text-secondary m-1 p-2 border border-secondary rounded">
+        <div
+          className="d-flex flex-column align-items-center p-3 rounded"
+          style={modalBgColor}
+        >
           <CloseButton
             onClick={() => setSearchClicked(!searchClicked)}
             className="align-self-end"
@@ -94,6 +98,7 @@ function Navbar() {
         setShowOffCanvas={setShowOffCanvas}
         setSearchClicked={setSearchClicked}
         searchClicked={searchClicked}
+        style={modalBgColor}
       />
     </Nav>
   );

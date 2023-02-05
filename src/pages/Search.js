@@ -54,7 +54,7 @@ function Search() {
   };
 
   return (
-    <div className="text-secondary mt-3">
+    <div className=" mt-3">
       <h1>Pets Found:</h1>
       {!searchResults[0] && <Spinner className="mt-5" />}
       <SearchResultsContainer searchResults={searchResults} />

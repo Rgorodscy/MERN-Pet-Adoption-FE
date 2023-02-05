@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { buttonStyle } from "./libs";
 
 function UsersListItem({ user }) {
   const userPageLink = `/profile/:${user.id}`;
@@ -7,13 +8,12 @@ function UsersListItem({ user }) {
   return (
     <Link
       to={userPageLink}
-      className="
-    bg-info 
-    text-light  
+      className=" 
     border-bottom border-secondary rounded 
     d-block text-decoration-none 
     py-1 my-1
     text-capitalize"
+      style={buttonStyle}
     >
       {user.firstName} {user.lastName}
     </Link>
