@@ -1,19 +1,20 @@
 import React from "react";
 import { Card, Image, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { buttonStyle, cardBgColor } from "./libs";
 
 function PetCard({ pet }) {
   const petPageLink = `/pet/:${pet.id}`;
 
   let adoptionStatusAlertColor;
   if (pet.adoptionStatus === "Available") {
-    adoptionStatusAlertColor = "info";
+    adoptionStatusAlertColor = "available-color";
   } else if (pet.adoptionStatus === "Fostered") {
-    adoptionStatusAlertColor = "primary";
+    adoptionStatusAlertColor = "fostered-color";
   } else {
-    adoptionStatusAlertColor = "secondary";
+    adoptionStatusAlertColor = "adopted-color";
   }
+
+  const alertClass = `mt-3 ${adoptionStatusAlertColor}`;
 
   const onImageError = (e) => {
     e.target.src =
@@ -21,8 +22,8 @@ function PetCard({ pet }) {
   };
 
   return (
-    <Card className="shadow-sm rounded" style={cardBgColor}>
-      <Card.Header style={buttonStyle}>
+    <Card className="shadow-sm rounded card-style">
+      <Card.Header className="card-header-style">
         <h3 className="text-center text-capitalize">{pet.name}</h3>
       </Card.Header>
       <Card.Body>
@@ -34,10 +35,8 @@ function PetCard({ pet }) {
           className="border border-secondary"
           onError={onImageError}
         />
-        <Alert className="mt-3" variant={adoptionStatusAlertColor}>
-          {pet.adoptionStatus}
-        </Alert>
-        <Link to={petPageLink} className="btn" style={buttonStyle}>
+        <Alert className={alertClass}>{pet.adoptionStatus}</Alert>
+        <Link to={petPageLink} className="btn button-style">
           See More
         </Link>
       </Card.Body>

@@ -3,7 +3,6 @@ import { Form, Button, FloatingLabel } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { buttonStyle, inputStyle } from "./libs";
 
 function PetAddForm() {
   const { serverUrl, token, setShowNotificationToast, setToastMessage } =
@@ -12,7 +11,7 @@ function PetAddForm() {
   const formGroupClass =
     "d-flex align-items-baseline justify-content-between mb-2";
   const formLabelClass = "me-3 text-nowrap";
-  const formInputClass = "w-100 bg-transparent";
+  const formInputClass = "w-100 bg-transparent input-group";
   const floatLabelClassList = "w-100";
   const [validated, setValidated] = useState(false);
   const [newPet, setNewPet] = useState({
@@ -102,7 +101,6 @@ function PetAddForm() {
             <FloatingLabel className={floatLabelClassList} label="Type">
               <Form.Select
                 className={formInputClass}
-                style={inputStyle}
                 defaultValue={0}
                 onChange={handleChange}
                 name="type"
@@ -123,7 +121,6 @@ function PetAddForm() {
             >
               <Form.Select
                 className={formInputClass}
-                style={inputStyle}
                 defaultValue={0}
                 onChange={handleChange}
                 name="adoptionStatus"
@@ -143,7 +140,6 @@ function PetAddForm() {
           <FloatingLabel className={floatLabelClassList} label="Name">
             <Form.Control
               className={formInputClass}
-              style={inputStyle}
               type="text"
               onChange={handleChange}
               name="name"
@@ -156,7 +152,6 @@ function PetAddForm() {
           <Form.Label className={formLabelClass}>Image</Form.Label>
           <Form.Control
             className={formInputClass}
-            style={inputStyle}
             type="file"
             onChange={(e) => setImage(e.target.files[0])}
             name="image"
@@ -168,7 +163,6 @@ function PetAddForm() {
             <FloatingLabel className={floatLabelClassList} label="Height">
               <Form.Control
                 className={formInputClass}
-                style={inputStyle}
                 type="number"
                 onChange={handleChange}
                 name="height"
@@ -181,7 +175,6 @@ function PetAddForm() {
             <FloatingLabel className={floatLabelClassList} label="Weight">
               <Form.Control
                 className={formInputClass}
-                style={inputStyle}
                 type="number"
                 onChange={handleChange}
                 name="weight"
@@ -194,7 +187,6 @@ function PetAddForm() {
             <FloatingLabel className={floatLabelClassList} label="Color">
               <Form.Control
                 className={formInputClass}
-                style={inputStyle}
                 type="text"
                 onChange={handleChange}
                 name="color"
@@ -208,7 +200,6 @@ function PetAddForm() {
           <FloatingLabel className={floatLabelClassList} label="Bio">
             <Form.Control
               className={formInputClass}
-              style={inputStyle}
               as="textarea"
               onChange={handleChange}
               name="bio"
@@ -221,7 +212,6 @@ function PetAddForm() {
           <FloatingLabel className={floatLabelClassList} label="Hypoallergenic">
             <Form.Select
               className={formInputClass}
-              style={inputStyle}
               defaultValue={0}
               onChange={handleChange}
               name="hypoallergenic"
@@ -242,7 +232,6 @@ function PetAddForm() {
           >
             <Form.Control
               className={formInputClass}
-              style={inputStyle}
               type="text"
               onChange={handleChange}
               name="dietary"
@@ -255,7 +244,6 @@ function PetAddForm() {
           <FloatingLabel className={floatLabelClassList} label="Breed">
             <Form.Control
               className={formInputClass}
-              style={inputStyle}
               type="text"
               onChange={handleChange}
               name="breed"
@@ -264,7 +252,7 @@ function PetAddForm() {
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
-        <Button className="mb-2 w-100" type="submit" style={buttonStyle}>
+        <Button className="mb-2 w-100 button-style" type="submit">
           Add Pet
         </Button>
       </Form>

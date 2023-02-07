@@ -4,12 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { BsBookmarkHeartFill, BsBookmarkHeart } from "react-icons/bs";
 import { useAuth } from "../contexts/AuthContext";
-import {
-  buttonStyle,
-  fosterButtonStyle,
-  inputStyle,
-  returnButtonStyle,
-} from "../components/libs";
 
 function Pet() {
   const {
@@ -54,14 +48,15 @@ function Pet() {
   };
 
   let adoptionStatusAlertColor;
-
   if (petData.adoptionStatus === "Available") {
-    adoptionStatusAlertColor = "info";
+    adoptionStatusAlertColor = "available-color";
   } else if (petData.adoptionStatus === "Fostered") {
-    adoptionStatusAlertColor = "primary";
+    adoptionStatusAlertColor = "fostered-color";
   } else {
-    adoptionStatusAlertColor = "secondary";
+    adoptionStatusAlertColor = "adopted-color";
   }
+
+  const alertClass = `mt-3 ${adoptionStatusAlertColor}`;
 
   const handleSave = async () => {
     const reqBody = {
@@ -206,7 +201,7 @@ function Pet() {
             />
             <h1>{petData.name}</h1>
             <div className="w-50">
-              <p className=" rounded" style={inputStyle}>
+              <p className=" rounded input-group">
                 Details: <br />
                 Height: {petData.height} <br />
                 Weight: {petData.weight} <br />
@@ -216,15 +211,13 @@ function Pet() {
                 Dietary Restrictions: {petData.dietary} <br />
                 Breed: {petData.breed} <br />
               </p>
-              <Alert variant={adoptionStatusAlertColor}>
-                {petData.adoptionStatus}
-              </Alert>
+              <Alert className={alertClass}>{petData.adoptionStatus}</Alert>
             </div>
             <div className="d-flex w-50 justify-content-around mb-3">
               {(petData.adoptionStatus === "Available" && (
                 <Button
                   onClick={() => handleAdoptFoster("Adopt")}
-                  style={buttonStyle}
+                  className="button-style"
                 >
                   Adopt
                 </Button>
@@ -232,7 +225,7 @@ function Pet() {
                 (petIsMyPet && petData.adoptionStatus === "Fostered" && (
                   <Button
                     onClick={() => handleAdoptFoster("Adopt")}
-                    style={buttonStyle}
+                    className="button-style"
                   >
                     Adopt
                   </Button>
@@ -240,21 +233,17 @@ function Pet() {
               {petData.adoptionStatus === "Available" && (
                 <Button
                   onClick={() => handleAdoptFoster("Foster")}
-                  style={fosterButtonStyle}
+                  className="foster-button-style"
                 >
                   Foster
                 </Button>
               )}
               {petIsMyPet && (
-                <Button onClick={handleReturn} style={returnButtonStyle}>
+                <Button onClick={handleReturn} className="return-button-style">
                   Return
                 </Button>
               )}
-              <Link
-                onClick={handleSave}
-                className="h4"
-                style={{ color: "#00278A" }}
-              >
+              <Link onClick={handleSave} className="h4 color">
                 {petIsSaved && <BsBookmarkHeartFill />}
                 {!petIsSaved && <BsBookmarkHeart />}
               </Link>

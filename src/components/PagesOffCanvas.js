@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { modalBgColor, buttonStyle } from "./libs";
 
 function PagesOffCanvas({
   showOffCanvas,
@@ -23,47 +22,42 @@ function PagesOffCanvas({
   return (
     <>
       <Offcanvas show={showOffCanvas} onHide={handleClose}>
-        <Offcanvas.Header style={modalBgColor}>
+        <Offcanvas.Header className="modal-style">
           <Offcanvas.Title>Pages</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body style={modalBgColor}>
+        <Offcanvas.Body className=" modal-style">
           <div className="d-flex flex-column">
             <Button
-              className="btn-info mb-2"
+              className="btn-info mb-2 button-style"
               variant="info"
               onClick={() => setSearchClicked(!searchClicked)}
-              style={buttonStyle}
             >
               Search
             </Button>
             <Button
-              className="btn-info mb-2"
+              className="btn-info mb-2 button-style"
               onClick={() => pageNavigate("/mypets")}
-              style={buttonStyle}
             >
               My Pets
             </Button>
             <Button
-              className="btn-info mb-2"
+              className="btn-info mb-2 button-style"
               onClick={() => pageNavigate("/myprofile")}
-              style={buttonStyle}
             >
               Profile
             </Button>
             {adminUser === true && (
               <Button
-                className="btn-info mb-2"
+                className="btn-info mb-2 button-style"
                 onClick={() => pageNavigate("/dashboard")}
-                style={buttonStyle}
               >
                 Dashboard
               </Button>
             )}
             {adminUser === true && (
               <Button
-                className="btn-info mb-2"
+                className="btn-info mb-2 button-style"
                 onClick={() => pageNavigate("/petadd")}
-                style={buttonStyle}
               >
                 Add a Pet
               </Button>

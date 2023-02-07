@@ -75,6 +75,7 @@ function ProfileForm() {
               name="firstName"
               onChange={handleChange}
               placeholder="First Name"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -86,6 +87,7 @@ function ProfileForm() {
               name="lastName"
               onChange={handleChange}
               placeholder="Last Name"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -97,6 +99,7 @@ function ProfileForm() {
               name="email"
               onChange={handleChange}
               placeholder="Email"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -108,6 +111,7 @@ function ProfileForm() {
               name="phone"
               onChange={handleChange}
               placeholder="Phone Number"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -119,6 +123,7 @@ function ProfileForm() {
               name="password"
               onChange={handleChange}
               placeholder="Password"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -130,6 +135,7 @@ function ProfileForm() {
               name="confirmPassword"
               onChange={handleChange}
               placeholder="Confirm Password"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -141,10 +147,11 @@ function ProfileForm() {
               name="bio"
               onChange={handleChange}
               placeholder="Bio"
+              className="input-group"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
-        <Button type="submit" variant="info" className="mt-2">
+        <Button type="submit" className="mt-2 button-style">
           Update Profile
         </Button>
       </Form>

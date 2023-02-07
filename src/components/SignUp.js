@@ -3,7 +3,6 @@ import { Form, Button, FloatingLabel } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { buttonStyle, inputStyle } from "./libs";
 
 function Signup({ setSignup }) {
   const { serverUrl, setToastMessage, setShowNotificationToast } = useAuth();
@@ -77,7 +76,7 @@ function Signup({ setSignup }) {
               name="email"
               required
               placeholder="Email"
-              style={inputStyle}
+              className="input-group"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide a valid email
@@ -92,7 +91,7 @@ function Signup({ setSignup }) {
               name="password"
               required={true}
               placeholder="Password"
-              style={inputStyle}
+              className="input-group"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please choose a password
@@ -107,7 +106,7 @@ function Signup({ setSignup }) {
               name="confirmPassword"
               required={true}
               placeholder="Confirm Password"
-              style={inputStyle}
+              className="input-group"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please confirm your password
@@ -122,7 +121,7 @@ function Signup({ setSignup }) {
               name="firstName"
               required={true}
               placeholder="First Name"
-              style={inputStyle}
+              className="input-group"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide your First Name
@@ -137,7 +136,7 @@ function Signup({ setSignup }) {
               name="lastName"
               required={true}
               placeholder="Last Name"
-              style={inputStyle}
+              className="input-group"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide your Last Name
@@ -152,7 +151,7 @@ function Signup({ setSignup }) {
               name="phone"
               required={true}
               placeholder="Phone Number"
-              style={inputStyle}
+              className="input-group"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide your Phone Number
@@ -160,7 +159,7 @@ function Signup({ setSignup }) {
           </FloatingLabel>
         </Form.Group>
 
-        <Button className="w-100 mt-3" type="submit" style={buttonStyle}>
+        <Button className="w-100 mt-3 button-style" type="submit">
           Sign Up
         </Button>
       </Form>

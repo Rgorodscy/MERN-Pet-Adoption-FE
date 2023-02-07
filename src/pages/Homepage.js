@@ -35,7 +35,7 @@ function Homepage() {
         className="d-flex"
       >
         {showLoginModal && (
-          <div className="p-3 rounded" style={{ backgroundColor: "#00D9C2" }}>
+          <div className="p-3 rounded modal-style">
             <div className="d-flex justify-content-end">
               <CloseButton onClick={() => setShowLoginModal(false)} />
             </div>

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import { modalBgColor } from "./libs";
 
 function LoginSignUpModal() {
   const [signup, setSignup] = useState(false);
 
   return (
-    <div className="d-flex flex-column align-items-center" style={modalBgColor}>
+    <div className="d-flex flex-column align-items-center modal-style">
       <Form.Check
         type="switch"
         id="login-signup"

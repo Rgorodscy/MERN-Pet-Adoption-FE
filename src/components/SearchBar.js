@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { buttonStyle, inputStyle } from "./libs";
 
 function SearchBar({ setSearchClicked, setShowOffCanvas }) {
   const [advancedSearch, setAdvancedSearch] = useState(false);
@@ -24,7 +23,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
   const floatLabelClassList = "w-100 mx-1";
 
   return (
-    <div>
+    <div className="modal-style">
       <Form onSubmit={handleSearch} className="d-flex flex-column text-center">
         <h1>Search your Pet</h1>
         <Form.Check
@@ -41,7 +40,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
               onChange={handleChange}
               name="type"
               placeholder="Type"
-              style={inputStyle}
+              className="input-group"
             >
               <option value={0} disabled>
                 Select...
@@ -62,7 +61,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
                   defaultValue={0}
                   onChange={handleChange}
                   name="adoptionStatus"
-                  style={inputStyle}
+                  className="input-group"
                 >
                   <option value={0} disabled={true}>
                     Select...
@@ -84,7 +83,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
                     onChange={handleChange}
                     name="minHeight"
                     placeholder="Min Height"
-                    style={inputStyle}
+                    className="input-group"
                   ></Form.Control>
                 </FloatingLabel>
               </Form.Group>
@@ -98,7 +97,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
                     onChange={handleChange}
                     name="maxHeight"
                     placeholder="Max Height"
-                    style={inputStyle}
+                    className="input-group"
                   ></Form.Control>
                 </FloatingLabel>
               </Form.Group>
@@ -114,7 +113,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
                     onChange={handleChange}
                     name="minWeight"
                     placeholder="Min Weight"
-                    style={inputStyle}
+                    className="input-group"
                   ></Form.Control>
                 </FloatingLabel>
               </Form.Group>
@@ -128,7 +127,7 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
                     onChange={handleChange}
                     name="maxWeight"
                     placeholder="Max Weight"
-                    style={inputStyle}
+                    className="input-group"
                   ></Form.Control>
                 </FloatingLabel>
               </Form.Group>
@@ -140,13 +139,13 @@ function SearchBar({ setSearchClicked, setShowOffCanvas }) {
                   onChange={handleChange}
                   name="name"
                   placeholder="Name"
-                  style={inputStyle}
+                  className="input-group"
                 ></Form.Control>
               </FloatingLabel>
             </Form.Group>
           </>
         )}
-        <Button type="submit" className="mt-2" style={buttonStyle}>
+        <Button type="submit" className="mt-2 button-style">
           Search
         </Button>
       </Form>
