@@ -40,7 +40,7 @@ function MyPets() {
         ""
       )}
       {userPetsList.map((pet) => (
-        <Col xs={{ span: 6 }} sm={{ span: 4 }} md={{ span: 3 }} className="m-2">
+        <Col xs={6} sm={4} md={3} className="m-2">
           <PetCard key={pet.id} pet={pet} />
         </Col>
       ))}

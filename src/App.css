@@ -95,3 +95,12 @@
   background-color: #a6847c !important;
   color: #043a40 !important;
 }
+
+.border-color {
+  border: 2px solid #021373 !important;
+}
+
+.pet-user-name {
+  font-size: 1.5rem;
+  color: #a6847c;
+}

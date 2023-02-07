@@ -6,9 +6,9 @@ function Dashboard() {
   return (
     <div className="d-flex flex-column m-3">
       <h1>Dashboard</h1>
-      <div className="d-flex">
-        <PetsListContainer />
+      <div className="d-flex flex-column">
         <UsersListContainer />
+        <PetsListContainer />
       </div>
     </div>
   );

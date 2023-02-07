@@ -1,4 +1,5 @@
 import React from "react";
+import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function PetsListItem({ pet }) {
@@ -9,12 +10,19 @@ function PetsListItem({ pet }) {
       to={petPageLink}
       className="
     border-bottom border-secondary rounded 
-    d-block text-decoration-none 
+    d-flex text-decoration-none 
     py-1 my-1
-    text-capitalize
-    button-style"
+    button-style
+    justify-content-between
+    text-break"
     >
-      {pet.name}
+      <Col xs={3}>
+        <span className="pet-user-name text-capitalize">{pet.name}:</span>
+      </Col>
+
+      <Col xs={2}>Status: {pet.adoptionStatus}</Col>
+      <Col xs={2}>Type: {pet.type}</Col>
+      <Col xs={2}>Breed: {pet.breed}</Col>
     </Link>
   );
 }
