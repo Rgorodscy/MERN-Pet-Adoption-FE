@@ -37,8 +37,8 @@ function UsersListContainer() {
   return (
     <div>
       <h2>Users</h2>
+      {!usersList[0] && <Spinner />}
       <div className=" vh-25 overflow-auto rounded border-color shadow-sm">
-        {!usersList[0] && <Spinner />}
         {usersList &&
           usersList.map((user) => <UsersListItem key={user.id} user={user} />)}
       </div>
