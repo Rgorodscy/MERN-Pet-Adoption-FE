@@ -74,7 +74,7 @@ function Login() {
               name="email"
               placeholder="Email"
               required
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please insert your email
@@ -89,7 +89,7 @@ function Login() {
               name="password"
               placeholder="Password"
               required
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please insert your password

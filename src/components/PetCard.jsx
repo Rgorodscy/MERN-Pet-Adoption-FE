@@ -22,7 +22,7 @@ function PetCard({ pet }) {
   };
 
   return (
-    <Card className="shadow-sm rounded card-style">
+    <Card className="shadow-lg rounded card-style">
       <Card.Header className="card-header-style">
         <h3 className="text-center text-capitalize">{pet.name}</h3>
       </Card.Header>

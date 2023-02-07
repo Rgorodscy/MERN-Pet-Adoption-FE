@@ -75,7 +75,7 @@ function ProfileForm() {
               name="firstName"
               onChange={handleChange}
               placeholder="First Name"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -87,7 +87,7 @@ function ProfileForm() {
               name="lastName"
               onChange={handleChange}
               placeholder="Last Name"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -99,7 +99,7 @@ function ProfileForm() {
               name="email"
               onChange={handleChange}
               placeholder="Email"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -111,7 +111,7 @@ function ProfileForm() {
               name="phone"
               onChange={handleChange}
               placeholder="Phone Number"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -123,7 +123,7 @@ function ProfileForm() {
               name="password"
               onChange={handleChange}
               placeholder="Password"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -135,7 +135,7 @@ function ProfileForm() {
               name="confirmPassword"
               onChange={handleChange}
               placeholder="Confirm Password"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>
@@ -147,7 +147,7 @@ function ProfileForm() {
               name="bio"
               onChange={handleChange}
               placeholder="Bio"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
           </FloatingLabel>
         </Form.Group>

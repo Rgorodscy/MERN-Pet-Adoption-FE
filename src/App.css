@@ -37,7 +37,7 @@
   border: transparent !important;
 }
 
-.input-group {
+.input-style {
   background-color: transparent !important;
   color: #021373 !important;
   border: 2px solid #021373 !important;
@@ -63,7 +63,6 @@
 
 .card-style {
   background-color: #84d9d0 !important;
-  color: #a6847c !important;
   border: 2px solid #043a40 !important;
 }
 
@@ -103,4 +102,16 @@
 .pet-user-name {
   font-size: 1.5rem;
   color: #a6847c;
+}
+
+.toggle-style {
+  background-color: #043a40 !important;
+  color: #00d9c2 !important;
+  border-radius: 0px !important;
+  border: 0 !important;
+}
+
+.toggle-container-style {
+  border: 2px solid #043a40 !important;
+  border-radius: 4px !important;
 }

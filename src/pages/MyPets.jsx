@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Col } from "react-bootstrap";
+import { Form, Col, Button } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import PetCard from "../components/PetCard";
 
@@ -21,13 +21,10 @@ function MyPets() {
     <div className="d-flex flex-column align-items-center">
       <div className="my-3">
         <h1>My Pets</h1>
-        <Form.Check
-          type="switch"
-          id="mypets-savedpets"
-          label="I want to see my Saved Pets"
-          onChange={() => setSavedPets(!savedPets)}
-          value={savedPets}
-        />
+      </div>
+      <div className="toggle-container-style d-flex w-50 mb-3">
+        <Button className="w-50 toggle-style text-nowrap" disabled={!savedPets} onClick={() => setSavedPets(!savedPets)}>My Pets</Button>
+        <Button className="w-50 toggle-style text-nowrap" disabled={savedPets} onClick={() => setSavedPets(!savedPets)}>Saved Pets</Button>
       </div>
       {!userPetsList[0] && !savedPets ? (
         <h2>You currently do not own or foster any pets</h2>

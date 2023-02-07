@@ -14,6 +14,7 @@ import Navbar from "../components/Navbar";
 import PrivateRoute from "../components/PrivateRoute";
 import AdminRoute from "../components/AdminRoute";
 import NotificationToast from "../components/NotificationToast";
+import FooterComponent from "../components/FooterComponent";
 
 function MainComponent() {
   return (

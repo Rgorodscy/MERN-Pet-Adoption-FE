@@ -201,7 +201,7 @@ function Pet() {
             />
             <h1>{petData.name}</h1>
             <div className="w-50">
-              <p className=" rounded input-group">
+              <p className=" rounded input-style">
                 Details: <br />
                 Height: {petData.height} <br />
                 Weight: {petData.weight} <br />

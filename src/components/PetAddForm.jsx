@@ -11,7 +11,7 @@ function PetAddForm() {
   const formGroupClass =
     "d-flex align-items-baseline justify-content-between mb-2";
   const formLabelClass = "me-3 text-nowrap";
-  const formInputClass = "w-100 bg-transparent input-group";
+  const formInputClass = "w-100 bg-transparent input-style";
   const floatLabelClassList = "w-100";
   const [validated, setValidated] = useState(false);
   const [newPet, setNewPet] = useState({

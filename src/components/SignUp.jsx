@@ -76,7 +76,7 @@ function Signup({ setSignup }) {
               name="email"
               required
               placeholder="Email"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide a valid email
@@ -91,7 +91,7 @@ function Signup({ setSignup }) {
               name="password"
               required={true}
               placeholder="Password"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please choose a password
@@ -106,7 +106,7 @@ function Signup({ setSignup }) {
               name="confirmPassword"
               required={true}
               placeholder="Confirm Password"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please confirm your password
@@ -121,7 +121,7 @@ function Signup({ setSignup }) {
               name="firstName"
               required={true}
               placeholder="First Name"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide your First Name
@@ -136,7 +136,7 @@ function Signup({ setSignup }) {
               name="lastName"
               required={true}
               placeholder="Last Name"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide your Last Name
@@ -151,7 +151,7 @@ function Signup({ setSignup }) {
               name="phone"
               required={true}
               placeholder="Phone Number"
-              className="input-group"
+              className="input-style"
             ></Form.Control>
             <Form.Control.Feedback type="invalid">
               Please provide your Phone Number
