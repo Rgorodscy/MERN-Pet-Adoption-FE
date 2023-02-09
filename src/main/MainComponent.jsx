@@ -97,6 +97,7 @@ function MainComponent() {
             />
           </Routes>
           <NotificationToast />
+          {/* <FooterComponent /> */}
         </AuthProvider>
       </BrowserRouter>
     </div>
